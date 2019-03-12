@@ -11,7 +11,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "crawl:summary": "node scripts/crawl_stock_summary.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -21,5 +22,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "crawler": "^1.2.0",
+    "fast-csv": "^2.4.1",
+    "js-string-escape": "^1.0.1"
+  }
 }
