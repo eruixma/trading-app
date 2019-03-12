@@ -13,7 +13,7 @@ env = os.environ.get('APPNAME_ENV', 'dev')
 app = create_app('server.settings.%sConfig' % env.capitalize())
 
 manager = Manager(app)
-manager.add_command("server", Server(host=os.getenv('HOST', '127.0.0.1'), port=os.getenv('PORT', 5000)))
+manager.add_command("server", Server(host='0.0.0.0', port=os.getenv('PORT', 5000)))
 manager.add_command("show-urls", ShowUrls())
 manager.add_command("clean", Clean())
 
