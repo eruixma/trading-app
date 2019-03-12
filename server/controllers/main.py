@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template, flash, request, redirect, url_for
+from flask import Blueprint, render_template, flash, request, redirect, url_for, current_app
 from flask_login import login_user, logout_user, login_required
 
 from ..extensions import cache
 from ..forms import LoginForm
-from ..models import User
+from ..models import db, User
+
 
 main = Blueprint('main', __name__)
 
@@ -11,7 +12,7 @@ main = Blueprint('main', __name__)
 @main.route('/')
 @cache.cached(timeout=1000)
 def home():
-    return render_template('index.html')
+    return current_app.send_static_file('index.html')
 
 
 @main.route("/login", methods=["GET", "POST"])
