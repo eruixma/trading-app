@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "antd": "^3.15.0",
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "recompose": "^0.30.0"
   },
   "scripts": {
     "start": "react-scripts start",

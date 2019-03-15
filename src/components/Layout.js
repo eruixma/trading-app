@@ -1,0 +1,86 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withContext, getContext } from 'recompose'
+import classnames from 'classnames'
+
+function Logo(props) {
+  return <i className="icon icon-econ"/>
+}
+
+
+export const Layout = withContext({
+    theme: PropTypes.oneOf(['light', 'dark']),
+    product: PropTypes.string,
+    user: PropTypes.string,
+    onProfileClick: PropTypes.func,
+    showMenu: PropTypes.bool,
+    showSettings: PropTypes.bool,
+    currApp: PropTypes.string,
+    onToggleMenu: PropTypes.func,
+    children: PropTypes.any
+  },
+  props => props
+)(({children}) => React.Children.only(children))
+
+export const Theme = getContext({theme: PropTypes.oneOf(['light', 'dark'])})(({theme, children}) =>
+  <div className={theme}>{children}</div>)
+
+export const Header = getContext({product: PropTypes.string, user: PropTypes.string, onProfileClick: PropTypes.func})(
+  ({product, user, onProfileClick}) => {
+    return <header className="sysbar">
+      <div className="items-container">
+        <div className="item">
+          <Logo/>
+          <span className="product">{product}</span>
+        </div>
+      </div>
+      <div className="items-container">
+        <div className="item hover" onClick={onProfileClick}>
+          <i className="icon icon-profile"/>
+          <span className="username">{user}</span>
+        </div>
+      </div>
+    </header>
+  })
+
+
+export const SettingsPanel = getContext({showSettings: PropTypes.bool})(
+  ({showSettings, children}) => {
+    return (
+      <aside className={classnames("settings", {hidden: !showSettings})}>
+        {children}
+      </aside>
+    )
+  })
+
+export const AppWrapper = getContext({showSettings: PropTypes.bool})(
+  ({showSettings, children}) => {
+    return <div className={classnames("app", {"slide-right": !showSettings, "slide-left": showSettings})}>
+        {children}
+    </div>
+  })
+
+export const AppBar = getContext({showMenu: PropTypes.bool, currApp: PropTypes.string, onToggleMenu: PropTypes.func})(
+  ({showMenu, currApp, onToggleMenu, children}) => {
+    return <nav className="appbar">
+      <div className="actions-left" onClick={onToggleMenu}>
+        <div className="item">
+          <i className={classnames("navigation-toggle", {closed: showMenu})}/>
+        </div>
+        <div className={classnames("menu-anchor", {"open-menu": showMenu})}>Menu</div>
+        <div className={classnames("title", {"open-menu": showMenu})}>{currApp}</div>
+      </div>
+      <div className="actions-right">{children}</div>
+    </nav>
+  })
+
+export const AppBody = ({children}) => <div className="appbody">{children}</div>
+
+export const AppMenu = getContext({showMenu: PropTypes.bool})(
+  ({showMenu, children}) => <div className={classnames("appnav",{hidden:!showMenu})}>{children}</div>
+)
+
+export const AppContent = ({children}) => <div className="appcontent">{children}</div>
+
+
+
