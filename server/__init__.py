@@ -6,11 +6,14 @@ from webassets.loaders import PythonLoader as PythonAssetsLoader
 from . import assets
 from .models import db
 from .controllers.main import main
+from .controllers.watches import watches
+from .controllers.portfolio import portfolio
 
 from .extensions import (
     cache,
     assets_env,
     debug_toolbar,
+    api,
     login_manager
 )
 
@@ -22,9 +25,6 @@ import certifi
 context = create_default_context(cafile=certifi.where())
 
 es = Elasticsearch("https://uls32kycjg:srm3vka7ud@rx-trading-app-5203068395.us-east-1.bonsaisearch.net:443", ssl_context=context)
-
-res = es.search(index="stock", body={"query": {"match_all": {}}})
-print("Got %d Hits:" % res['hits']['total'])
 
 
 def create_app(object_name):
@@ -50,6 +50,8 @@ def create_app(object_name):
     # initialize SQLAlchemy
     db.init_app(app)
 
+    api.init_app(app)
+
     login_manager.init_app(app)
 
     # Import and register the different asset bundles
@@ -60,5 +62,7 @@ def create_app(object_name):
 
     # register our blueprints
     app.register_blueprint(main)
+    app.register_blueprint(watches, url_prefix="/api/v1")
+    app.register_blueprint(portfolio, url_prefix="/api/v1")
 
     return app

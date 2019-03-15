@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String())
     password = db.Column(db.String())
+    balance = db.Column(db.Float())
 
     def __init__(self, username, password):
         self.username = username
@@ -49,6 +50,14 @@ class Trade(db.Model):
     amount = db.Column(db.Integer)
 
 
-class Stock(db.Model):
+class StockMeta(db.Model):
     symbol = db.Column(db.String(), primary_key=True)
     company = db.Column(db.String())
+    industry = db.Column(db.String())
+    country = db.Column(db.String())
+    description = db.Column(db.String())
+
+
+class Portfolio(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+
