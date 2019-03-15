@@ -6,7 +6,6 @@ from webassets.loaders import PythonLoader as PythonAssetsLoader
 from . import assets
 from .models import db
 from .controllers.main import main
-from .controllers.watches import watches
 from .controllers.portfolio import portfolio
 
 from .extensions import (
@@ -16,15 +15,6 @@ from .extensions import (
     api,
     login_manager
 )
-
-from elasticsearch import Elasticsearch
-
-from ssl import create_default_context
-import certifi
-
-context = create_default_context(cafile=certifi.where())
-
-es = Elasticsearch("https://uls32kycjg:srm3vka7ud@rx-trading-app-5203068395.us-east-1.bonsaisearch.net:443", ssl_context=context)
 
 
 def create_app(object_name):
@@ -62,7 +52,6 @@ def create_app(object_name):
 
     # register our blueprints
     app.register_blueprint(main)
-    app.register_blueprint(watches, url_prefix="/api/v1")
     app.register_blueprint(portfolio, url_prefix="/api/v1")
 
     return app
