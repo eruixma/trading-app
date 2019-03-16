@@ -5,6 +5,7 @@ import Menu from '../Menu'
 import SearchField from '../components/SearchField'
 import Radium, { Style } from "radium"
 
+import '../style/search.css'
 
 class Search extends PureComponent {
   state = {
