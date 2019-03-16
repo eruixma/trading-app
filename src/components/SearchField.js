@@ -2,15 +2,23 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Radium from 'radium'
 import Autosuggest from 'react-autosuggest'
+import SuggestionCard from './SuggestionCard'
 
 class SearchField extends PureComponent {
   state = {
-    value: ''
+    value: '',
+    lastUpdateTime: Date.now()
   }
   onChange = (event, {newValue}) => {
     this.setState({
       value: newValue
     })
+  }
+  getOnSuggestionsFetchRequested = ({value, reason}) => {
+    if ((reason === 'input-changed' && Date.now() - this.state.lastUpdateTime > 1000) || reason === 'suggestions-revealed') {
+      this.props.fetchSuggestions(value)
+      this.setState({lastUpdateTime: Date.now()})
+    }
   }
 
   render() {
@@ -18,11 +26,11 @@ class SearchField extends PureComponent {
       <div>
         <Autosuggest
           theme={styles.theme}
-          suggestions={[{name: 'aaa'}]}
-          onSuggestionsFetchRequested={args => console.log(args)}
-          onSuggestionsClearRequested={() => console.log('clear suggestions')}
-          getSuggestionValue={suggestion => suggestion.name}
-          renderSuggestion={suggestion => <div>{suggestion.name}</div>}
+          suggestions={this.props.suggestions}
+          onSuggestionsFetchRequested={this.getOnSuggestionsFetchRequested}
+          onSuggestionsClearRequested={() => this.props.clearSuggestions()}
+          getSuggestionValue={suggestion => suggestion.symbol}
+          renderSuggestion={suggestion => <SuggestionCard {...suggestion}/>}
           inputProps={{
             placeholder: '',
             value: this.state.value,
@@ -35,7 +43,11 @@ class SearchField extends PureComponent {
   }
 }
 
-SearchField.propTypes = {}
+SearchField.propTypes = {
+  suggestions: PropTypes.array,
+  clearSuggestions: PropTypes.func,
+  fetchSuggestions: PropTypes.func
+}
 
 const styles = {
   theme: {
@@ -53,6 +65,13 @@ const styles = {
       paddingLeft: ' 8px',
       cursor: 'text',
       paddingLop: '21px',
+    },
+    suggestionsList: {
+      listStyle: 'none',
+      marginLeft: '-47px'
+    },
+    suggestion: {
+      padding: 0
     }
   }
 }

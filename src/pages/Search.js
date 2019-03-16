@@ -34,7 +34,11 @@ class Search extends PureComponent {
                 <label style={styles.label}>Symbol, company, description, or anything you expected</label>
               </div>
               <div className="row">
-                <SearchField/>
+                <SearchField
+                  suggestions={this.props.suggestions}
+                  fetchSuggestions={this.props.actions.fetchSuggestions}
+                  clearSuggestions={this.props.actions.clearSuggestions}
+                />
               </div>
               <div className="row">
                 <div style={styles.buttonWrapper}>

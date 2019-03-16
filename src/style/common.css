@@ -48,7 +48,69 @@ body {
     src: url("icons/icons.eot?mvqo1v#iefix") format("embedded-opentype"), url("icons/icons.ttf?mvqo1v") format("truetype"), url("icons/icons.woff?mvqo1v") format("woff"), url("icons/icons.svg?mvqo1v#icons") format("svg");
     font-style: normal;
 }
-
+.dark .card {
+    max-width: 100%;
+    padding: 16px;
+    margin: 8px;
+    background-color: #333;
+    border: 1px solid transparent;
+}
+.dark .card.selected {
+    border: 1px solid #0082f0;
+}
+.dark .card:hover {
+    cursor: pointer;
+    background-color: #4E4E4E;
+}
+.dark .card.draggable:hover {
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+.dark .card.draggable .left .title::before {
+    content: "\e935";
+    font-family: "Ericsson Icons";
+    font-size: 16px;
+    vertical-align: baseline;
+    margin-right: 8px;
+}
+.dark .card .header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-bottom: 0;
+}
+.dark .card .header .left {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+.dark .card .header .left .title {
+    font-size: 16px;
+    font-family: "Ericsson Hilda";
+    font-weight: 400;
+}
+.dark .card .header .left .subtitle {
+    font-size: 12px;
+    opacity: 0.6;
+    display: block;
+    margin-top: 4px;
+    margin-left: 0;
+}
+.dark .card .header .right .action {
+    font-size: 20px;
+    font-weight: 400;
+}
+.dark .card .header .right .action i {
+    font-size: 16px;
+    font-weight: 300;
+    vertical-align: baseline;
+}
+.dark .card .content {
+    padding-top: 16px;
+}
 .dark .icon-abs-brakes::before {
     content: "\e900";
 }
@@ -11539,3 +11601,66 @@ body {
     }
 }
 
+.light .card {
+    max-width: 100%;
+    padding: 16px;
+    margin: 8px;
+    background-color: #fafafa;
+    border: 1px solid transparent;
+}
+.light .card.selected {
+    border: 1px solid #0082f0;
+}
+.light .card:hover {
+    cursor: pointer;
+    background-color: white;
+}
+.light .card.draggable:hover {
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+.light .card.draggable .left .title::before {
+    content: "\e935";
+    font-family: "Ericsson Icons";
+    font-size: 16px;
+    vertical-align: baseline;
+    margin-right: 8px;
+}
+.light .card .header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-bottom: 0;
+}
+.light .card .header .left {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+.light .card .header .left .title {
+    font-size: 16px;
+    font-family: "Ericsson Hilda";
+    font-weight: 500;
+}
+.light .card .header .left .subtitle {
+    font-size: 12px;
+    opacity: 0.6;
+    display: block;
+    margin-top: 4px;
+    margin-left: 0;
+}
+.light .card .header .right .action {
+    font-size: 20px;
+    font-weight: 500;
+}
+.light .card .header .right .action i {
+    font-size: 16px;
+    font-weight: 400;
+    vertical-align: baseline;
+}
+.light .card .content {
+    padding-top: 16px;
+}

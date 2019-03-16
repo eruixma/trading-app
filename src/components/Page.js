@@ -38,7 +38,7 @@ class Page extends PureComponent {
                 <label className="switch">
                   <input
                     type="checkbox"
-                    checked={this.state.theme === 'light'}
+                    checked={this.props.theme === 'light'}
                     onChange={e => {
                       this.props.changeTheme(e.target.checked ? 'light' : 'dark')
                     }}/>

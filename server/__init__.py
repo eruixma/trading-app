@@ -7,6 +7,7 @@ from . import assets
 from .models import db
 from .controllers.main import main
 from .controllers.portfolio import portfolio
+from .controllers.search import search
 
 from .extensions import (
     cache,
@@ -40,7 +41,6 @@ def create_app(object_name):
     # initialize SQLAlchemy
     db.init_app(app)
 
-    api.init_app(app)
 
     login_manager.init_app(app)
 
@@ -53,5 +53,8 @@ def create_app(object_name):
     # register our blueprints
     app.register_blueprint(main)
     app.register_blueprint(portfolio, url_prefix="/api/v1")
+    app.register_blueprint(search, url_prefix="/api/v1")
+
+    api.init_app(app)
 
     return app

@@ -1,19 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { changeTheme } from '../reducers/app'
+import { clearSuggestions, fetchSuggestions } from '../reducers/search'
+import {changeTheme} from '../reducers/app'
 import Search from '../pages/Search'
 
 function mapStateToProps(state) {
+  const {suggestions} = state.search
   const {theme} = state.app
   return {
+    suggestions,
     theme
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({changeTheme}, dispatch)
+    actions: bindActionCreators({changeTheme,fetchSuggestions, clearSuggestions}, dispatch)
   }
 }
 export default connect(
