@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
-import Portfolio from './pages/Portfolio'
-import Search from './pages/Search'
-import Quotes from './pages/Quotes'
+import Portfolio from './container/Portfolio'
+import Search from './container/Search'
+import Quotes from './container/Quotes'
 
 import './style/common.css'
 

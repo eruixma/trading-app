@@ -18,7 +18,6 @@ const {
 
 class Page extends PureComponent {
   state = {
-    theme: 'dark',
     showMenu: true,
     showSettings: false
   }
@@ -41,7 +40,7 @@ class Page extends PureComponent {
                     type="checkbox"
                     checked={this.state.theme === 'light'}
                     onChange={e => {
-                      this.setState({theme: e.target.checked ? 'light' : 'dark'})
+                      this.props.changeTheme(e.target.checked ? 'light' : 'dark')
                     }}/>
                   <i className="ball"/>
                   <span data-enabled="Light" data-disabled="Dark"/>
@@ -63,7 +62,7 @@ class Page extends PureComponent {
     return (
       <div className={this.props.className}>
         <Layout
-          theme={this.state.theme}
+          theme={this.props.theme}
           product={'Stock Trading'}
           user={this.props.user}
           onProfileClick={() => this.setState((old) => ({showSettings: !old.showSettings}))}
@@ -104,6 +103,7 @@ Page.propTypes = {
   user: PropTypes.string,
   appbar: PropTypes.any,
   menu: PropTypes.any,
+  changeTheme: PropTypes.func,
   children: PropTypes.any
 }
 

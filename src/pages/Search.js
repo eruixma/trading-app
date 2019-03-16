@@ -24,6 +24,8 @@ class Search extends PureComponent {
           pageName={'Search'}
           user={'Ruixin'}
           menu={<Menu/>}
+          theme={this.props.theme}
+          changeTheme={this.props.actions.changeTheme}
           className={'search-page'}
         >
           <div className="tile" style={styles.tile}>
@@ -48,7 +50,10 @@ class Search extends PureComponent {
   }
 }
 
-Search.propTypes = {}
+Search.propTypes = {
+  theme: PropTypes.oneOf(['light', 'dark']),
+  actions: PropTypes.object
+}
 
 const styles = {
   button: {

@@ -11,6 +11,8 @@ class Portfolio extends PureComponent {
         pageName={'Portfolio'}
         user={'Ruixin'}
         menu={<Menu/>}
+        theme={this.props.theme}
+        changeTheme={this.props.actions.changeTheme}
       >
 
       </Page>
@@ -18,6 +20,9 @@ class Portfolio extends PureComponent {
   }
 }
 
-Portfolio.propTypes = {}
+Portfolio.propTypes = {
+  theme: PropTypes.oneOf(['light', 'dark']),
+  actions: PropTypes.object
+}
 
 export default Portfolio

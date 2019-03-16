@@ -10,6 +10,8 @@ class Quotes extends PureComponent {
         pageName={'Quotes'}
         user={'Ruixin'}
         menu={<Menu/>}
+        theme={this.props.theme}
+        changeTheme={this.props.actions.changeTheme}
       >
 
       </Page>
@@ -17,6 +19,9 @@ class Quotes extends PureComponent {
   }
 }
 
-Quotes.propTypes = {}
+Quotes.propTypes = {
+  theme: PropTypes.oneOf(['light', 'dark']),
+  actions: PropTypes.object
+}
 
 export default Quotes
