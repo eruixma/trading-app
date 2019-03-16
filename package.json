@@ -6,10 +6,13 @@
     "antd": "^3.15.0",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
+    "radium": "^0.25.1",
     "react": "^16.8.4",
+    "react-autosuggest": "^9.4.3",
     "react-dom": "^16.8.4",
     "react-router-dom": "^4.4.0",
     "react-scripts": "2.1.8",
+    "react-themeable": "^1.1.0",
     "recompose": "^0.30.0"
   },
   "scripts": {

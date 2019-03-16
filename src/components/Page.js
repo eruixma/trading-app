@@ -61,38 +61,40 @@ class Page extends PureComponent {
 
   render() {
     return (
-      <Layout
-        theme={this.state.theme}
-        product={'Stock Trading'}
-        user={this.props.user}
-        onProfileClick={() => this.setState((old) => ({showSettings: !old.showSettings}))}
-        showMenu={this.state.showMenu}
-        showSettings={this.state.showSettings}
-        currApp={this.props.pageName}
-        onToggleMenu={() => this.setState((old) => ({showMenu: !old.showMenu}))}
-      >
-        <Theme>
-          <Header/>
-          <main>
-            <SettingsPanel>
-              {this.getSettings()}
-            </SettingsPanel>
-            <AppWrapper>
-              <AppBar>
-                {this.props.appbar}
-              </AppBar>
-              <AppBody>
-                <AppMenu>
-                  {this.props.menu}
-                </AppMenu>
-                <AppContent>
-                  {this.props.children}
-                </AppContent>
-              </AppBody>
-            </AppWrapper>
-          </main>
-        </Theme>
-      </Layout>
+      <div className={this.props.className}>
+        <Layout
+          theme={this.state.theme}
+          product={'Stock Trading'}
+          user={this.props.user}
+          onProfileClick={() => this.setState((old) => ({showSettings: !old.showSettings}))}
+          showMenu={this.state.showMenu}
+          showSettings={this.state.showSettings}
+          currApp={this.props.pageName}
+          onToggleMenu={() => this.setState((old) => ({showMenu: !old.showMenu}))}
+        >
+          <Theme>
+            <Header/>
+            <main>
+              <SettingsPanel>
+                {this.getSettings()}
+              </SettingsPanel>
+              <AppWrapper>
+                <AppBar>
+                  {this.props.appbar}
+                </AppBar>
+                <AppBody>
+                  <AppMenu>
+                    {this.props.menu}
+                  </AppMenu>
+                  <AppContent>
+                    {this.props.children}
+                  </AppContent>
+                </AppBody>
+              </AppWrapper>
+            </main>
+          </Theme>
+        </Layout>
+      </div>
     )
   }
 }
