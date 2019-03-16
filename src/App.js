@@ -1,60 +1,11 @@
 import React, { Component } from 'react'
-import {
-  Input,
-  Row,
-  Col,
-  Table,
-} from 'antd'
-import 'antd/dist/antd.css'
+import { BrowserRouter as Router, Route } from "react-router-dom"
+
+import Portfolio from './pages/Portfolio'
+import Search from './pages/Search'
+import Quotes from './pages/Quotes'
+
 import './style/common.css'
-import {
-  AppBar,
-  AppBody,
-  AppContent,
-  AppMenu,
-  AppWrapper,
-  Header,
-  Layout,
-  SettingsPanel,
-  Theme
-} from './components/Layout'
-import PropTypes from 'prop-types'
-
-const {Search} = Input
-
-const columns = [
-  {title: 'Name', dataIndex: 'name', key: 'name'},
-  {title: 'Age', dataIndex: 'age', key: 'age'},
-  {title: 'Address', dataIndex: 'address', key: 'address'},
-  {
-    title: 'Action', dataIndex: '', key: 'x', render: () => <a href="javascript:;">Delete</a>,
-  },
-]
-
-const data = [
-  {
-    key: 1,
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    description: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
-  },
-  {
-    key: 2,
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
-  },
-  {
-    key: 3,
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    description: 'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.',
-  },
-]
-
 
 class App extends Component {
 
@@ -241,77 +192,12 @@ class App extends Component {
       )
     }*/
 
-  state = {
-    showMenu: true,
-    showSettings: false
-  }
-
-
   render() {
-    return <Layout
-      theme={'light'}
-      product={'Stock Trading'}
-      user={'Ruixin'}
-      onProfileClick={() => this.setState((old)=>({showSettings: !old.showSettings}))}
-      showMenu={this.state.showMenu}
-      showSettings={this.state.showSettings}
-      currApp={'Portfolio'}
-      onToggleMenu={() => this.setState((old)=>({showMenu: !old.showMenu}))}
-    >
-      <Theme>
-        <Header/>
-        <main>
-          <SettingsPanel/>
-          <AppWrapper>
-            <AppBar>
-              <Search
-                placeholder="input search text"
-                onSearch={value => console.log(value)}
-                enterButton={true}
-                style={{verticalAlign: 'middle'}}
-              />
-            </AppBar>
-            <AppBody>
-              <AppMenu>
-                <div className="tree navigation">
-                  <ul>
-                    <li><a className="item active">Example page</a></li>
-                    <li><a className="item">Standalone example page</a></li>
-
-                    <li>
-                      <span className="title closed">Group of pages</span>
-                      <ul>
-                        <li><a className="item">Example 1</a></li>
-                        <li><a className="item">Example 2</a></li>
-                        <li><a className="item">Example 3</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </AppMenu>
-              <AppContent>
-                <div className="row">
-                  <div className="tile sm-12" id="t-basic">
-
-                    <div className="header">
-                      <div className="left">
-                        <div className="title">Top tile</div>
-                        <div className="subtitle">Subtitle example</div>
-                      </div>
-                    </div>
-
-                    <div className="content">
-                      <div className="box"></div>
-                    </div>
-
-                  </div>
-                </div>
-              </AppContent>
-            </AppBody>
-          </AppWrapper>
-        </main>
-      </Theme>
-    </Layout>
+    return <Router>
+      <Route exact path="/" component={Quotes}/>
+      <Route path="/portfolio" component={Portfolio}/>
+      <Route path="/search" component={Search}/>
+    </Router>
   }
 }
 

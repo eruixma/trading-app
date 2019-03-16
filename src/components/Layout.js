@@ -4,11 +4,10 @@ import { withContext, getContext } from 'recompose'
 import classnames from 'classnames'
 
 function Logo(props) {
-  return <i className="icon icon-graph-line"/>
+  return <i className="icon icon-graph-line color-green"/>
 }
 
-
-export const Layout = withContext({
+const Layout = withContext({
     theme: PropTypes.oneOf(['light', 'dark']),
     product: PropTypes.string,
     user: PropTypes.string,
@@ -23,13 +22,13 @@ export const Layout = withContext({
 )(({children}) => React.Children.only(children))
 
 
-export const Theme = getContext({
+const Theme = getContext({
   theme: PropTypes.oneOf(['light', 'dark'])
 })(
   ({theme, children}) => <div className={theme}>{children}</div>
 )
 
-export const Header = getContext({
+const Header = getContext({
   product: PropTypes.string,
   user: PropTypes.string,
   onProfileClick: PropTypes.func
@@ -51,7 +50,7 @@ export const Header = getContext({
 )
 
 
-export const SettingsPanel = getContext({
+const SettingsPanel = getContext({
   showSettings: PropTypes.bool
 })(
   ({showSettings, children}) => <aside className={classnames("settings", {hidden: !showSettings})}>
@@ -59,7 +58,7 @@ export const SettingsPanel = getContext({
   </aside>
 )
 
-export const AppWrapper = getContext({
+const AppWrapper = getContext({
   showSettings: PropTypes.bool
 })(
   ({showSettings, children}) => <div className={classnames("app", {
@@ -70,7 +69,7 @@ export const AppWrapper = getContext({
   </div>
 )
 
-export const AppBar = getContext({
+const AppBar = getContext({
   showMenu: PropTypes.bool,
   currApp: PropTypes.string,
   onToggleMenu: PropTypes.func
@@ -87,12 +86,23 @@ export const AppBar = getContext({
   </nav>
 )
 
-export const AppBody = ({children}) => <div className="appbody">{children}</div>
+const AppBody = ({children}) => <div className="appbody">{children}</div>
 
-export const AppMenu = getContext({
+const AppMenu = getContext({
   showMenu: PropTypes.bool
 })(
   ({showMenu, children}) => <div className={classnames("appnav", {hidden: !showMenu})}>{children}</div>
 )
 
-export const AppContent = ({children}) => <div className="appcontent">{children}</div>
+const AppContent = ({children}) => <div className="appcontent">{children}</div>
+
+Layout.AppBar = AppBar
+Layout.AppWrapper = AppWrapper
+Layout.SettingsPanel = SettingsPanel
+Layout.Header = Header
+Layout.Theme = Theme
+Layout.AppContent = AppContent
+Layout.AppMenu = AppMenu
+Layout.AppBody = AppBody
+
+export default  Layout
