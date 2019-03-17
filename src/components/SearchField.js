@@ -5,19 +5,19 @@ import Autosuggest from 'react-autosuggest'
 import SuggestionCard from './SuggestionCard'
 
 class SearchField extends PureComponent {
-  state = {
-    value: '',
-    lastUpdateTime: Date.now()
-  }
-  onChange = (event, {newValue}) => {
-    this.setState({
-      value: newValue
-    })
-  }
+  lastUpdateTime =  Date.now()
+  updateTimeout = null
+
   getOnSuggestionsFetchRequested = ({value, reason}) => {
-    if ((reason === 'input-changed' && Date.now() - this.state.lastUpdateTime > 1000) || reason === 'suggestions-revealed') {
-      this.props.fetchSuggestions(value)
-      this.setState({lastUpdateTime: Date.now()})
+    if ((reason === 'input-changed')) {
+      if(this.updateTimeout)
+        clearTimeout(this.updateTimeout)
+
+      this.updateTimeout = setTimeout(()=>{
+        this.props.fetchSuggestions(value)
+        this.lastUpdateTime = Date.now()
+        this.updateTimeout = null
+      }, 500)
     }
   }
 
@@ -29,12 +29,12 @@ class SearchField extends PureComponent {
           suggestions={this.props.suggestions}
           onSuggestionsFetchRequested={this.getOnSuggestionsFetchRequested}
           onSuggestionsClearRequested={() => this.props.clearSuggestions()}
-          getSuggestionValue={suggestion => suggestion.symbol}
+          getSuggestionValue={suggestion => suggestion.company}
           renderSuggestion={suggestion => <SuggestionCard {...suggestion}/>}
           inputProps={{
             placeholder: '',
-            value: this.state.value,
-            onChange: this.onChange,
+            value: this.props.value,
+            onChange: this.props.onChange,
             autoFocus: true
           }}
         />

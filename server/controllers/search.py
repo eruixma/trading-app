@@ -30,24 +30,9 @@ class Suggestion(Resource):
             body={
                 "size": 5,
                 "query": {
-                    "prefix": {
-                        "symbol": args['q']
-                    }
-                }
-            }
-        )
-        suggestions = list(map(lambda hit: hit["_source"],result['hits']['hits']))
-        if len(suggestions) > 0:
-            return suggestions
-        result = es.search(
-            index='stock',
-            doc_type='doc',
-            body={
-                "size": 5,
-                "query": {
                     "multi_match": {
                         "query": args['q'],
-                        "fields": ['company^3', 'description']
+                        "fields": ['symbol^3', 'company^2', 'description']
                     }
                 }
             }

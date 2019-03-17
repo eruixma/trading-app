@@ -1,13 +1,13 @@
-.search-page .dark  .tile {
-    background: linear-gradient(-45deg, #242424,#242424, #288964);
-    background-size: 400% 400%;
-    animation: Gradient 30s ease infinite;
-}
-.search-page .light  .tile {
-    background: linear-gradient(-45deg, #f2f2f2,#f2f2f2, #f2c618);
-    background-size: 400% 400%;
-    animation: Gradient 30s ease infinite;
-}
+/*.search-page .dark  .search-wrapper {*/
+    /*background: linear-gradient(-45deg, #242424,#288964, #242424);*/
+    /*background-size: 400% 400%;*/
+    /*animation: Gradient 30s ease infinite;*/
+/*}*/
+/*.search-page .light  .search-wrapper {*/
+    /*background: linear-gradient(-45deg, #f2f2f2,#f2f2f2, #f2c618);*/
+    /*background-size: 400% 400%;*/
+    /*animation: Gradient 30s ease infinite;*/
+/*}*/
 
 @-webkit-keyframes Gradient {
     0% {

@@ -2,6 +2,7 @@ import { createActions, handleActions, combineActions, createAction } from 'redu
 import axios from 'axios'
 import encodeurl from "encodeurl"
 
+
 const defaultState = {
   suggestions: []
 }
