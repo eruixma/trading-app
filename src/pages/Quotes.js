@@ -1,13 +1,14 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Page from '../components/Page'
 import Menu from '../Menu'
 import HorizontalScroll from 'react-scroll-horizontal'
 
 import 'react-card-scroll/lib/assets/styles.css'
+import '../style/quotes.css'
 import classnames from 'classnames'
 
-class Quotes extends PureComponent {
+class Quotes extends Component {
 
   updateHandle = null
 
@@ -38,6 +39,7 @@ class Quotes extends PureComponent {
             </div>
 
             <div className="content">
+              {this.props.worldIndices.length===0&& <div className="loading large" style={{margin:'0 auto', marginTop:'50px'}}/>}
               <HorizontalScroll
                 reverseScroll={true}
                 style={{height: '150px'}}

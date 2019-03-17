@@ -1,0 +1,16 @@
+/* Flash class and keyframe animation */
+.flashit{
+    color: #00aaaa;
+    -webkit-animation: flash linear 1s;
+    animation: flash linear 1s;
+}
+@-webkit-keyframes flash {
+    0% { opacity: .1; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes flash {
+    0% { opacity: .1; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
