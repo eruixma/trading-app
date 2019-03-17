@@ -61,3 +61,8 @@ class StockMeta(db.Model):
 class Portfolio(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
 
+
+class SearchHistory(db.Model):
+    query = db.Column(db.String(), primary_key=True)
+    last = db.Column(db.DateTime())
+    results = db.Column(db.String())

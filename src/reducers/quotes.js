@@ -18,6 +18,9 @@ const defaultState = {
     "Energy": 0,
     "Industrials": 0,
     "Real Estate": 0
+  },
+  prices:{
+
   }
 }
 
@@ -37,8 +40,16 @@ export const fetchRealtimeSector = ()=>dispatch =>{
     })
 }
 
+export const fetchPrice = (symbol)=>dispatch=>{
+  axios.get(`api/v1/quotes/price/${symbol}`)
+    .then(price=>{
+      dispatch(updatePrice({symbol, price: price.data}))
+    })
+}
+
 export const updateWorldIndices = createAction('UPDATE_WORLD_INDICES')
 export const updateRealtimeSector = createAction('UPDATE_REALTIME_SECTOR')
+export const updatePrice = createAction('UPDATE_STOCK')
 
 
 const reducer = handleActions(
@@ -48,6 +59,9 @@ const reducer = handleActions(
     },
     [updateRealtimeSector]: (state, {payload}) => {
       return {...state, realtimeSector:payload}
+    },
+    [updatePrice]: (state, {payload})=>{
+      return {...state, prices: {...state.prices, [payload.symbol]: payload.price}}
     }
   },
   defaultState

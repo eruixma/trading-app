@@ -32,6 +32,11 @@ sector_schema = api.model('IndexSchema', {
     "Real Estate": fields.String()
 })
 
+price_schema = api.model('PriceSchema', {
+    'price': fields.String(),
+    'change': fields.String(),
+})
+
 
 @ns.route('/indices')
 class Indices(Resource):
@@ -63,3 +68,20 @@ class SectorPerformance(Resource):
     def get(self):
         req = requests.get('https://www.alphavantage.co/query?function=SECTOR&apikey=DZHPXXR2H4LNPP84')
         return req.json()['Rank A: Real-Time Performance']
+
+
+@ns.route('/price/<string:symbol>')
+class SectorPerformance(Resource):
+
+    @ns.marshal_with(price_schema)
+    def get(self, symbol):
+        req = requests.get('https://www.gurufocus.com/stock/%s' % symbol)
+        soup = BeautifulSoup(req.text)
+        price = soup.select('.stock_header_price')[0].text
+        up = soup.select('#stock_header_price_green')
+        down = soup.select('#stock_header_price_red')
+        if len(up) > 0:
+            change = '+' + up[0].text
+        else:
+            change = '-' + down[0].text
+        return {'price': price, 'change': change}

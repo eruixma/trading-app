@@ -75,8 +75,8 @@ const AppBar = getContext({
   onToggleMenu: PropTypes.func
 })(
   ({showMenu, currApp, onToggleMenu, children}) => <nav className="appbar">
-    <div className="actions-left" onClick={onToggleMenu}>
-      <div className="item">
+    <div className="actions-left">
+      <div className="item"  onClick={onToggleMenu} >
         <i className={classnames("navigation-toggle", {closed: showMenu})}/>
       </div>
       <div className={classnames("menu-anchor", {"open-menu": showMenu})}>Menu</div>

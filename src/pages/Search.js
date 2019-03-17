@@ -12,6 +12,7 @@ import '../style/search.css'
 import CandleStickChart from '../components/CandleStickChart'
 import { timeParse } from "d3-time-format"
 import _ from 'lodash'
+import * as classnames from 'classnames'
 
 // TODO temp test data
 const hsbcIntradayTS = {
@@ -729,115 +730,80 @@ class Search extends PureComponent {
   }
 
   componentDidMount() {
-    const queries = parse(this.props.location.search)
-    return this.setState({value: queries.q || ''})
+    let queries = parse(this.props.location.search)
+    queries.q && this.props.actions.search(queries.q)
+    this.setState({value: queries.q || ''})
   }
 
   render() {
+    let directQuery = this.props.location.search !== ''
     return (
       <div>
         <Page
-          pageName={'Search'}
+          pageName={directQuery ? (<Fragment>
+            <input type="text" value={this.state.value} onChange={(e) => this.onChange(e, {newValue: e.target.value})} style={{width: '400px'}}/>
+            <button
+              onClick={() => {
+                this.props.history.push(encodeurl(`/?q=${this.state.value}`))
+                this.props.actions.search(this.state.value)
+              }}
+              className="btn primary"
+            >Search
+            </button>
+          </Fragment>) : 'Search'}
           user={'Ruixin'}
           menu={<Menu/>}
           theme={this.props.theme}
           changeTheme={this.props.actions.changeTheme}
           className={'search-page'}
-          appbar={this.props.location.search !== '' ? (
-            <Fragment>
-              <input type="text" value={this.state.value} onChange={(e) => this.onChange(e, {newValue: e.target.value})} style={{width: '200px'}}/>
-              <button
-                onClick={() => this.props.history.push(encodeurl(`/search?q=${this.state.value}`))}
-                className="btn primary"
-              >Search
-              </button>
-            </Fragment>
-          ) : null}
+          appbar={directQuery && <button className="btn">Tools</button>}
         >
-          {this.props.location.search !== '' ?
-            <Fragment>
+          {directQuery ?
+            this.props.searchResults.map((result) => (
               <div className="row">
                 <div className="card sm-12">
                   <div className="header">
                     <div className="left">
-                      <div className="title">HSBC Holding plc</div>
-                      <div className="subtitle">HSBC</div>
+                      <div className="title">{result.company}</div>
+                      <div className="subtitle">{result.symbol}</div>
                     </div>
                   </div>
                   <div className="content">
                     <div className="row">
                       <div className="column sm-4">
+                        {this.props.prices[result.symbol] &&
                         <div className="kpi">
+                          <div className="item text-xl">
+                            <span>{this.props.prices[result.symbol].price}</span>
+                          </div>
                           <div className="item color-red text-xl">
-                            <span className=""><i className="icon icon-arrow-down"></i></span>
-                            <span className="">-0.93</span>
-                            <span className="">%</span>
+                            <span className=""><i className={classnames("icon", {
+                              "icon-arrow-down":this.props.prices[result.symbol].change.charAt(0)==='-',
+                              "icon-arrow-up":this.props.prices[result.symbol].change.charAt(0)==='+'
+                            })}/></span>
+                            <span className="">{this.props.prices[result.symbol].change}</span>
                             <span>&nbsp;</span>
                           </div>
-                          <div className="item text-xl">
-                            <span>305.50</span>
-                            <span className="text-lg color-gray">USD</span>
-                          </div>
                         </div>
-                        <p style={{marginTop:'8px'}}> HSBC Holdings PLC provides commercial banking, global banking, and wealth management among other services.
-                          It operates in Europe, Asia, the Middle East and North Africa, and North America.London-based
-                          HSBC has about 4,000 offices in 70 countries and is among the largest banks in the world.
-                          It operates in Europe, Asia, the Middle East and North Africa, and North America.
-                          The bank provides commercial banking, global banking, and wealth management, among other services.
-                        </p>
+                        }
                       </div>
                       <div className="column sm-8">
-                          <CandleStickChart
-                            data={_.sortBy(Object.keys(hsbcIntradayTS)
-                              .map(k=>Object.assign({
+{/*                        <CandleStickChart
+                          data={_.sortBy(Object.keys(hsbcIntradayTS)
+                            .map(k => Object.assign({
                               date: timeParse("%Y-%m-%d")(k)
-                            },_.mapKeys(hsbcIntradayTS[k], (v, key)=>key.split(' ')[1])))
-                              .map(data=>({...data, volume: data.volume*1000})), ['date'])
-                            }
-
-                          />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="card sm-12">
-                  <div className="header">
-                    <div className="left">
-                      <div className="title">HSBC Holding plc</div>
-                      <div className="subtitle">HSBC</div>
-                    </div>
-                  </div>
-                  <div className="content">
-                    <div className="row">
-                      <div className="column sm-4">
-                        <div className="kpi">
-                          <div className="item color-red text-xl">
-                            <span className=""><i className="icon icon-arrow-down"></i></span>
-                            <span className="">-0.93</span>
-                            <span className="">%</span>
-                            <span>&nbsp;</span>
-                          </div>
-                          <div className="item text-xl">
-                            <span>305.50</span>
-                            <span className="text-lg color-gray">USD</span>
-                          </div>
-                        </div>
-                        <p style={{marginTop:'8px'}}> HSBC Holdings PLC provides commercial banking, global banking, and wealth management among other services.
-                          It operates in Europe, Asia, the Middle East and North Africa, and North America.London-based
-                          HSBC has about 4,000 offices in 70 countries and is among the largest banks in the world.
-                          It operates in Europe, Asia, the Middle East and North Africa, and North America.
-                          The bank provides commercial banking, global banking, and wealth management, among other services.
-                        </p>
-                      </div>
-                      <div className="column sm-8">
-
+                            }, _.mapKeys(hsbcIntradayTS[k], (v, key) => key.split(' ')[1])))
+                            .map(data => ({...data, volume: data.volume * 1000})), ['date'])
+                          }
+                        />*/}
+                        <p>{result.description.replace('\\n\\n', '').replace('\\', '')}</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </Fragment>
-            : <div className="search-wrapper tile" style={styles.tile}>
+            )) :
+            <div className="search-wrapper tile" style={styles.tile}>
               <div className="search-container" style={styles.content}>
                 <div className="row">
                   <label style={styles.label}>Symbol, company, description, or anything you expected</label>
@@ -856,7 +822,10 @@ class Search extends PureComponent {
                     <button
                       className="btn primary"
                       style={styles.button}
-                      onClick={() => this.props.history.push(encodeurl(`/?q=${this.state.value}`))}
+                      onClick={() => {
+                        this.props.history.push(encodeurl(`/?q=${this.state.value}`))
+                        this.props.actions.search(this.state.value)
+                      }}
                     >Search
                     </button>
                     <button className="btn" style={styles.button}>I'm Feeling Lucky</button>

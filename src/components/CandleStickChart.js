@@ -30,7 +30,7 @@ class CandleStickChart extends Component {
     const xExtents = [start, end];
     return (
       <ChartCanvas
-        height={280}
+        height={200}
         ratio={ratio}
         width={width}
         margin={{ left: 70, right: 70, top: 10, bottom: 30 }}
