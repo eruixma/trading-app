@@ -8,6 +8,7 @@ from .models import db
 from .controllers.main import main
 from .controllers.portfolio import portfolio
 from .controllers.search import search
+from .controllers.quotes import quotes
 
 from .extensions import (
     cache,
@@ -54,6 +55,7 @@ def create_app(object_name):
     app.register_blueprint(main)
     app.register_blueprint(portfolio, url_prefix="/api/v1")
     app.register_blueprint(search, url_prefix="/api/v1")
+    app.register_blueprint(quotes, url_prefix="/api/v1")
 
     api.init_app(app)
 
