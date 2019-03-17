@@ -26,6 +26,7 @@
     "react-sizeme": "^2.5.2",
     "react-stockcharts": "^0.7.8",
     "react-themeable": "^1.1.0",
+    "recharts": "^1.5.0",
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",

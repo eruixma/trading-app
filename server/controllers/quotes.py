@@ -18,6 +18,20 @@ index_schema = api.model('IndexSchema', {
     'change': fields.Float()
 })
 
+sector_schema = api.model('IndexSchema', {
+    'Information Technology': fields.String(),
+    "Consumer Discretionary": fields.String(),
+    "Financials": fields.String(),
+    "Consumer Staples": fields.String(),
+    "Health Care": fields.String(),
+    "Utilities": fields.String(),
+    "Materials": fields.String(),
+    "Communication Services": fields.String(),
+    "Energy": fields.String(),
+    "Industrials": fields.String(),
+    "Real Estate": fields.String()
+})
+
 
 @ns.route('/indices')
 class Indices(Resource):
@@ -40,3 +54,12 @@ class Indices(Resource):
             })
 
         return results
+
+
+@ns.route('/sector')
+class SectorPerformance(Resource):
+
+    @ns.marshal_with(sector_schema)
+    def get(self):
+        req = requests.get('https://www.alphavantage.co/query?function=SECTOR&apikey=DZHPXXR2H4LNPP84')
+        return req.json()['Rank A: Real-Time Performance']

@@ -856,7 +856,7 @@ class Search extends PureComponent {
                     <button
                       className="btn primary"
                       style={styles.button}
-                      onClick={() => this.props.history.push(encodeurl(`/search?q=${this.state.value}`))}
+                      onClick={() => this.props.history.push(encodeurl(`/?q=${this.state.value}`))}
                     >Search
                     </button>
                     <button className="btn" style={styles.button}>I'm Feeling Lucky</button>

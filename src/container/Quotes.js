@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { changeTheme } from '../reducers/app'
-import { fetchWorldIndices } from '../reducers/quotes'
+import { fetchWorldIndices, fetchRealtimeSector } from '../reducers/quotes'
 import Quotes from '../pages/Quotes'
 
 function mapStateToProps(state) {
   const {theme} = state.app
-  const {worldIndices} = state.quotes
+  const {worldIndices, realtimeSector} = state.quotes
   return {
+    realtimeSector,
     worldIndices,
     theme
   }
@@ -16,7 +17,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({changeTheme, fetchWorldIndices}, dispatch)
+    actions: bindActionCreators({changeTheme, fetchWorldIndices,fetchRealtimeSector}, dispatch)
   }
 }
 export default connect(

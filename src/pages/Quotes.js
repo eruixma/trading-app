@@ -7,6 +7,9 @@ import HorizontalScroll from 'react-scroll-horizontal'
 import 'react-card-scroll/lib/assets/styles.css'
 import '../style/quotes.css'
 import classnames from 'classnames'
+import { ChartCanvas } from 'react-stockcharts'
+import BarChart from '../components/BarChart'
+import * as encodeurl from 'encodeurl'
 
 class Quotes extends Component {
 
@@ -14,6 +17,7 @@ class Quotes extends Component {
 
   componentDidMount() {
     this.props.actions.fetchWorldIndices()
+    this.props.actions.fetchRealtimeSector()
   }
 
   componentWillUnmount() {
@@ -39,14 +43,13 @@ class Quotes extends Component {
             </div>
 
             <div className="content">
-              {this.props.worldIndices.length===0&& <div className="loading large" style={{margin:'0 auto', marginTop:'50px'}}/>}
               <HorizontalScroll
                 reverseScroll={true}
                 style={{height: '150px'}}
               >
                 {
                   this.props.worldIndices.map(i => (
-                    <div className="card" style={{width: '300px'}} key={i.market}>
+                    <div className="card" style={{width: '300px'}} key={i.market}  onClick={()=>this.props.history.push(encodeurl(`/?q=${i.market}`))}>
                       <div className="header">
                         <div className="left">
                           <div className="title">{i.market}</div>
@@ -64,7 +67,7 @@ class Quotes extends Component {
                           <div className="item">
                             <div className="text-lg">
                                 <span className={classnames("item")}>
-                                  <i className={classnames("icon",{
+                                  <i className={classnames("icon", {
                                     "icon-arrow-up": i.change >= 0,
                                     'icon-arrow-down': i.change < 0
                                   })}/>{i.changePercent}
@@ -72,7 +75,7 @@ class Quotes extends Component {
                             </div>
                             <div className="text-lg">
                                 <span className={classnames("item")}>
-                                  <i className={classnames("icon",{
+                                  <i className={classnames("icon", {
                                     "icon-plus": i.change >= 0,
                                     'icon-minus': i.change < 0
                                   })}/>{i.change}
@@ -87,6 +90,40 @@ class Quotes extends Component {
               </HorizontalScroll>
 
             </div>
+          </div>
+        </div>
+        <div className="row" style={{height: '600px'}}>
+          <div className="tile sm-4">
+            <div className="header">
+              <div className="left">
+                <div className="title">Sector performance</div>
+              </div>
+            </div>
+            <div className="content">
+              <BarChart
+                data={Object.keys(this.props.realtimeSector).map(k => ({x: k, y: this.props.realtimeSector[k]}))}
+              />
+            </div>
+          </div>
+          <div className="tile sm-8" style={{flexDirection:'row', flexWrap:'wrap'}}>
+            {
+              Object.keys(this.props.realtimeSector).map(k=>(
+                <div className="card" style={{width: '30%'}} key={k} onClick={()=>this.props.history.push(encodeurl(`/?q=${k}`))}>
+                  <div className="content">
+                    <div className="kpi">
+                      <div className="color-gray">{k}</div>
+                      <div className={classnames("item text-xl",{"color-red":this.props.realtimeSector[k]<0,'color-green':this.props.realtimeSector[k]>=0})}>
+                        <span className=""><i className={classnames("icon ",{"icon-arrow-down":this.props.realtimeSector[k]<0,'icon-arrow-up':this.props.realtimeSector[k]>=0})}/></span>
+                        <span className="">{this.props.realtimeSector[k]}</span>
+                        <span className="">%</span>
+                        <span>&nbsp;</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+
           </div>
         </div>
       </Page>
