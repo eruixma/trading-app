@@ -8,14 +8,14 @@ search = Blueprint('search', __name__)
 
 ns = api.namespace('search', path='/api/v1/search', description='search stocks')
 
-suggestion_schema = api.model('SuggestionSchema', {
+stock_schema = api.model('StockSchema', {
     'symbol': fields.String(),
     'company': fields.String(),
-    'PB': fields.String(),
-    'PE': fields.String(),
+    'PB': fields.Float(),
+    'PE': fields.Float(),
     'industry': fields.String(),
-    'MarketCap': fields.String(),
-    'EnterpriseValue': fields.String(),
+    'MarketCap': fields.Float(),
+    'EnterpriseValue': fields.Float(),
     'location': fields.String(),
     'description': fields.String(),
 })
@@ -25,29 +25,90 @@ parser.add_argument('q', type=str, help='value to query')
 parser.add_argument('limit', type=int, help='limit number of results')
 
 
-@ns.route('/')
-class Search(Resource):
+def parse_keyword(q):
+    if ':' in q:
+        return q.split(':')[0].strip(), q.split(':')[1].strip()
+    return None, q
 
-    @ns.doc("search suggestions")
-    @ns.marshal_list_with(suggestion_schema)
+
+def parse_logic(q):
+    if ' AND ' in q:
+        return 'AND', q.split('AND')
+
+    return None, q
+
+
+def parse_query(q):
+    logic, query = parse_logic(q)
+    dsl = {}
+    if logic == 'AND':
+        dsl['query'] = {'bool': {}}
+        for s in query:
+            k, v = parse_keyword(s)
+            if k == 'sort':
+                dsl['sort'] = [{v.split(',')[0]: {'order': v.split(',')[1] if len(v.split(',')) > 0 else 'desc'}}]
+            elif k in ["company", "PE", "industry", "symbol", "MarketCap", "EnterpriseValue", "PB", "location"]:
+                dsl['query']['bool'] = {'must': {'term': {k: v}}}
+            else:
+                dsl['query']['bool'] = {'must': {'fuzzy': {'message': q}}}
+    else:
+        k, v = parse_keyword(q)
+        if k == 'order':
+            dsl['order'] = [{v.split(',')[0]: {'order': v.split(',')[1] if len(v.split(',')) > 0 else 'desc'}}]
+        elif k in ["company", "PE", "industry", "symbol", "MarketCap", "EnterpriseValue", "PB", "location"]:
+            dsl['query'] = {'term': {k: v}}
+        else:
+            dsl['query'] = {'fuzzy': {'message': q}}
+
+    return dsl
+
+
+@ns.route('/')
+class Stock(Resource):
+
+    @ns.doc("search stocks")
+    @ns.marshal_list_with(stock_schema)
     def get(self):
         args = parser.parse_args()
-        query_dsl = {
-            "query": {
-                "multi_match": {
-                    "query": args['q'],
-                    "fields": ['symbol^4', 'company^3', 'industry^2', 'description', 'message']
-                }
-            }
-        }
+        query = parse_query(args['q'])
+        print(query)
+
         if args['limit']:
-            query_dsl['size'] = args['limit']
+            query['size'] = args['limit']
+
         result = es.search(
             index='stock',
             doc_type='doc',
-            body=query_dsl
+            body=query
         )
 
         hits = list(map(lambda hit: hit["_source"], result['hits']['hits']))
 
         return hits
+
+
+@ns.route('/suggestion')
+class Suggestion(Resource):
+
+    @ns.doc("search suggestions")
+    @ns.marshal_list_with(stock_schema)
+    def get(self):
+        args = parser.parse_args()
+        result = es.search(
+            index='stock',
+            doc_type='doc',
+            body={
+                "size": 5,
+                "query": {
+                    "multi_match": {
+                        "query": args['q'],
+                        "type": "phrase_prefix",
+                        "fields": ['symbol^3', 'company^2']
+                    }
+                },
+                "sort": [
+                    {'MarketCap': {'order': 'desc'}}
+                ]
+            }
+        )
+        return list(map(lambda hit: hit["_source"], result['hits']['hits']))

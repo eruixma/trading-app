@@ -39,7 +39,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "crawl:summary": "node scripts/crawl_stock_summary.js",
-    "crawl:es": "node scripts/crawl_es.js"
+    "crawl:es": "node scripts/crawl_es.js",
+    "convert": "node scripts/convert.js"
   },
   "eslintConfig": {
     "extends": "react-app"
