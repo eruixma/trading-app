@@ -788,7 +788,7 @@ class Search extends PureComponent {
                         }
                       </div>
                       <div className="column sm-8">
-{/*                        <CandleStickChart
+                      {/*<CandleStickChart
                           data={_.sortBy(Object.keys(hsbcIntradayTS)
                             .map(k => Object.assign({
                               date: timeParse("%Y-%m-%d")(k)
