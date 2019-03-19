@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from "react-router-dom"
-
-import Portfolio from './container/Portfolio'
-import Search from './container/Search'
-import Quotes from './container/Quotes'
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom"
+import SearchPage from './pages/SearchPage'
 
 import './style/common.css'
 
@@ -12,9 +9,12 @@ class App extends Component {
 
   render() {
     return <Router>
-      <Route exact path="/" component={Search}/>
-      <Route path="/portfolio" component={Portfolio}/>
-      <Route path="/quotes" component={Quotes}/>
+      <Switch>
+        <Route exact={true} path="/" render={()=><Redirect to={'/search'}/>}/>
+        <Route path="/search" component={SearchPage}/>
+        {/*<Route path="/portfolio" component={Portfolio}/>*/}
+        {/*<Route path="/quotes" component={Quotes}/>*/}
+      </Switch>
     </Router>
   }
 }

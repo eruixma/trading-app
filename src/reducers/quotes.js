@@ -1,6 +1,5 @@
-import { createActions, handleActions, combineActions, createAction } from 'redux-actions'
+import { createAction, handleActions } from 'redux-actions'
 import axios from 'axios'
-import encodeurl from "encodeurl"
 import _ from "lodash"
 
 
@@ -24,7 +23,7 @@ const defaultState = {
   }
 }
 
-export const fetchWorldIndices = () => dispatch => {
+const fetchWorldIndices = () => dispatch => {
   axios
     .get(`/api/v1/quotes/indices`)
     .then((indices) => {
@@ -32,7 +31,7 @@ export const fetchWorldIndices = () => dispatch => {
     })
 }
 
-export const fetchRealtimeSector = ()=>dispatch =>{
+const fetchRealtimeSector = ()=>dispatch =>{
   axios
     .get('/api/v1/quotes/sector')
     .then(sectors=>{
@@ -40,16 +39,25 @@ export const fetchRealtimeSector = ()=>dispatch =>{
     })
 }
 
-export const fetchPrice = (symbol)=>dispatch=>{
-  axios.get(`api/v1/quotes/price/${symbol}`)
+const fetchPrice = (symbol)=>dispatch=>{
+  axios.get(`/api/v1/quotes/price/${symbol}`)
     .then(price=>{
       dispatch(updatePrice({symbol, price: price.data}))
     })
 }
 
-export const updateWorldIndices = createAction('UPDATE_WORLD_INDICES')
-export const updateRealtimeSector = createAction('UPDATE_REALTIME_SECTOR')
-export const updatePrice = createAction('UPDATE_STOCK')
+const updateWorldIndices = createAction('UPDATE_WORLD_INDICES')
+const updateRealtimeSector = createAction('UPDATE_REALTIME_SECTOR')
+const updatePrice = createAction('UPDATE_STOCK')
+
+export const actions = {
+  fetchWorldIndices,
+  fetchRealtimeSector,
+  fetchPrice,
+  updateWorldIndices,
+  updateRealtimeSector,
+  updatePrice
+}
 
 
 const reducer = handleActions(

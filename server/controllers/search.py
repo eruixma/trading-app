@@ -54,7 +54,7 @@ def parse_query(q):
     else:
         k, v = parse_keyword(q)
         if k == 'order':
-            dsl['order'] = [{v.split(',')[0]: {'order': v.split(',')[1] if len(v.split(',')) > 0 else 'desc'}}]
+            dsl['sort'] = [{v.split(',')[0]: {'order': v.split(',')[1] if len(v.split(',')) > 0 else 'desc'}}]
         elif k in ["company", "PE", "industry", "symbol", "MarketCap", "EnterpriseValue", "PB", "location"]:
             dsl['query'] = {'term': {k: v}}
         else:
@@ -63,7 +63,7 @@ def parse_query(q):
     return dsl
 
 
-@ns.route('/')
+@ns.route('/stocks')
 class Stock(Resource):
 
     @ns.doc("search stocks")
@@ -71,6 +71,7 @@ class Stock(Resource):
     def get(self):
         args = parser.parse_args()
         query = parse_query(args['q'])
+        query['size'] = 5
         print(query)
 
         if args['limit']:
@@ -87,7 +88,7 @@ class Stock(Resource):
         return hits
 
 
-@ns.route('/suggestion')
+@ns.route('/suggestions')
 class Suggestion(Resource):
 
     @ns.doc("search suggestions")

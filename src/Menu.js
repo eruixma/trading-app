@@ -8,7 +8,7 @@ class Menu extends PureComponent {
       <div className="tree navigation">
         <ul>
           <li>
-            <NavLink className="item" to="/" exact>
+            <NavLink className="item" to="/">
               Search
               <i className="icon icon-search right-align"/>
             </NavLink>

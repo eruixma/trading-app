@@ -2,9 +2,12 @@ import { createActions, handleActions, combineActions } from 'redux-actions';
 
 const defaultState = { theme: 'dark' };
 
-export const { changeTheme } = createActions({
+export const actions = createActions({
   CHANGE_THEME: (theme) => ({ theme }),
 });
+
+
+const {changeTheme} = actions
 
 const reducer = handleActions(
   {

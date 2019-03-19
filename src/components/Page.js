@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Component } from 'react'
 import PropTypes from 'prop-types'
 import Layout from './Layout'
 import { Input } from 'antd'
+import { getContext, withContext } from 'recompose'
 
 const {Search} = Input
 
@@ -16,7 +17,7 @@ const {
   AppBody
 } = Layout
 
-class Page extends PureComponent {
+class Page extends Component {
   state = {
     showMenu: true,
     showSettings: false
@@ -107,4 +108,27 @@ Page.propTypes = {
   children: PropTypes.any
 }
 
-export default Page
+export const PageContext = withContext({
+    store: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired,
+    children: PropTypes.any
+  },
+  props => {
+    return props
+  }
+)(({children}) => React.Children.only(children))
+
+
+export default getContext({
+  store: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired
+})(
+  ({store, actions, children, ...rest}) => (
+    <Page
+      theme={store.app.theme}
+      changeTheme={actions.changeTheme}
+      {...rest}
+    >
+      {children}
+    </Page>)
+)
