@@ -9,12 +9,12 @@ function Logo(props) {
 
 const Layout = withContext({
     theme: PropTypes.oneOf(['light', 'dark']),
-    product: PropTypes.string,
-    user: PropTypes.string,
+    product: PropTypes.any,
+    user: PropTypes.any,
     onProfileClick: PropTypes.func,
     showMenu: PropTypes.bool,
     showSettings: PropTypes.bool,
-    currApp: PropTypes.string,
+    currApp: PropTypes.any,
     onToggleMenu: PropTypes.func,
     children: PropTypes.any
   },
@@ -71,7 +71,7 @@ const AppWrapper = getContext({
 
 const AppBar = getContext({
   showMenu: PropTypes.bool,
-  currApp: PropTypes.string,
+  currApp: PropTypes.any,
   onToggleMenu: PropTypes.func
 })(
   ({showMenu, currApp, onToggleMenu, children}) => <nav className="appbar">

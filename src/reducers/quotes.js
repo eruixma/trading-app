@@ -18,9 +18,9 @@ const defaultState = {
     "Industrials": 0,
     "Real Estate": 0
   },
-  prices:{
-
-  }
+  prices:{},
+  summaries:{},
+  intradayTimeSeries:{},
 }
 
 const fetchWorldIndices = () => dispatch => {
@@ -46,17 +46,37 @@ const fetchPrice = (symbol)=>dispatch=>{
     })
 }
 
+const fetchSummary = (symbol)=>dispatch=>{
+  axios.get(`/api/v1/search/stocks?q=symbol:${symbol}`)
+    .then(summary=>{
+      dispatch(updateSummary({symbol, summary: summary.data[0]}))
+    })
+}
+
+const fetchIntradayTimeSeries = (symbol)=>dispatch=>{
+  axios.get(`/api/v1/quotes/timeseries/${symbol}?function=TIME_SERIES_INTRADAY&interval=1`)
+    .then(timeSeries=>{
+      dispatch(updateTimeSeries({symbol, intradayTimeSeries: timeSeries.data}))
+    })
+}
+
+
 const updateWorldIndices = createAction('UPDATE_WORLD_INDICES')
 const updateRealtimeSector = createAction('UPDATE_REALTIME_SECTOR')
 const updatePrice = createAction('UPDATE_STOCK')
+const updateSummary = createAction('UPDATE_SUMMARY')
+const updateTimeSeries = createAction('UPDATE_TIME_SERIES')
 
 export const actions = {
   fetchWorldIndices,
   fetchRealtimeSector,
   fetchPrice,
+  fetchSummary,
+  fetchIntradayTimeSeries,
   updateWorldIndices,
   updateRealtimeSector,
-  updatePrice
+  updatePrice,
+  updateSummary,
 }
 
 
@@ -70,7 +90,13 @@ const reducer = handleActions(
     },
     [updatePrice]: (state, {payload})=>{
       return {...state, prices: {...state.prices, [payload.symbol]: payload.price}}
-    }
+    },
+    [updateSummary]: (state, {payload})=>{
+      return {...state, summaries: {...state.summaries, [payload.symbol]: payload.summary}}
+    },
+    [updateTimeSeries]: (state, {payload})=>{
+      return {...state, intradayTimeSeries: {...state.intradayTimeSeries, [payload.symbol]: payload.intradayTimeSeries}}
+    },
   },
   defaultState
 )

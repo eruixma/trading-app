@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import * as classnames from 'classnames'
 import * as PropTypes from 'prop-types'
 import { getContext } from 'recompose'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import queryString from 'query-string'
 
 class SearchResultList extends Component {
@@ -10,6 +10,11 @@ class SearchResultList extends Component {
   arrowIconClassName = (price) => classnames("icon", {
     "icon-arrow-down": price.change.charAt(0) === '-',
     "icon-arrow-up": price.change.charAt(0) === '+'
+  })
+
+  colorClassName = (price) => classnames("item text-md", {
+    "color-red": price.change.charAt(0) === '-',
+    "color-green": price.change.charAt(0) === '+',
   })
 
   componentDidMount() {
@@ -37,10 +42,10 @@ class SearchResultList extends Component {
                       <div className="item text-xl">
                         <span>{prices[result.symbol].price}</span>
                       </div>
-                      <div className="item color-red text-md">
-                    <span>
-                      <i className={this.arrowIconClassName(prices[result.symbol])}/>
-                    </span>
+                      <div className={this.colorClassName(prices[result.symbol])}>
+                        <span>
+                          <i className={this.arrowIconClassName(prices[result.symbol])}/>
+                        </span>
                         <span>{prices[result.symbol].change}</span>
                         <span>&nbsp;</span>
                       </div>
@@ -66,14 +71,18 @@ class SearchResultList extends Component {
                       </tbody>
                     </table>
                   </div> : (
-                    <div style={{display: 'flex', justifyContent: 'center', height:'100%', flexDirection:'column'}}>
+                    <div style={{display: 'flex', justifyContent: 'center', height: '100%', flexDirection: 'column'}}>
                       <div className="loading" style={{margin: '0 auto'}}/>
                     </div>
                   )
                 }
               </div>
               <div className="column sm-9">
-                <h3 style={{margin: 0, marginBottom: 8}}>{`${result.company}  (${result.symbol})`}</h3>
+                <h3 style={{margin: 0, marginBottom: 8}}>
+                  <Link to={`/quotes/stock/${result.symbol}`}>
+                    {`${result.company}  (${result.symbol})`}
+                  </Link>
+                </h3>
                 <p>{result.description.replace('\\n\\n', '').replace('\\', '')}</p>
               </div>
             </div>

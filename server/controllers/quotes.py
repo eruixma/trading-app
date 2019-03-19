@@ -37,6 +37,20 @@ price_schema = api.model('PriceSchema', {
     'change': fields.String(),
 })
 
+time_series_schema = api.model('TimeSeriesSchema', {
+    'time': fields.String(),
+    'open': fields.Float(),
+    'high': fields.Float(),
+    'low': fields.Float(),
+    'close': fields.Float(),
+    'volume': fields.Float(),
+})
+
+
+parser = reqparse.RequestParser()
+parser.add_argument('function', type=str)
+parser.add_argument('interval', type=int)
+
 
 @ns.route('/indices')
 class Indices(Resource):
@@ -66,7 +80,7 @@ class SectorPerformance(Resource):
 
     @ns.marshal_with(sector_schema)
     def get(self):
-        req = requests.get('https://www.alphavantage.co/query?function=SECTOR&apikey=DZHPXXR2H4LNPP84')
+        req = requests.get('https://www.alphavantage.co/query?function=SECTOR&&apikey=DZHPXXR2H4LNPP84')
         return req.json()['Rank A: Real-Time Performance']
 
 
@@ -85,3 +99,30 @@ class SectorPerformance(Resource):
         else:
             change = '-' + down[0].text
         return {'price': price, 'change': change}
+
+
+@ns.route('/timeseries/<string:symbol>')
+class TimeSeries(Resource):
+
+    @ns.marshal_with(time_series_schema)
+    def get(self, symbol):
+        args = parser.parse_args()
+        req = req = requests\
+            .get('https://www.alphavantage.co/query?function={}&symbol={}&interval={}min&apikey=DZHPXXR2H4LNPP84'
+                 .format(args['function'], symbol, args['interval'])
+                 )
+
+        ts = req.json()['Time Series ({}min)'.format(args['interval'])]
+
+        result = []
+        for k, v in ts.items():
+            result.append({
+                'time':k,
+                'open': float(v['1. open']),
+                'high': float(v['2. high']),
+                'low': float(v['3. low']),
+                'close': float(v['4. close']),
+                'volume': float(v['5. volume']),
+            })
+
+        return result

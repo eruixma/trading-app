@@ -69,7 +69,7 @@ class SearchMain extends Component {
     return (
       <PageContext>
         <Page
-          pageName={'Search stocks'}
+          pageName={<span className={'title-name'}>Search stocks</span>}
           user={'Ruixin'}
           menu={<Menu/>}
         >

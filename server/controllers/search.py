@@ -70,7 +70,7 @@ class Stock(Resource):
     @ns.marshal_list_with(stock_schema)
     def get(self):
         args = parser.parse_args()
-        query = parse_query(args['q'])
+        query = parse_query(args['q'].lower())
         query['size'] = 5
         print(query)
 

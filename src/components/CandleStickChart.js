@@ -22,7 +22,7 @@ class CandleStickChart extends Component {
   render() {
     const {type, data: initialData, width, ratio} = this.props;
 
-    const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor( d => d.date );
+    const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor( d => d.time );
     const {data, xScale, xAccessor, displayXAccessor} = xScaleProvider( initialData );
 
     const start = xAccessor(last(data));

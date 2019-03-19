@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-d
 import SearchPage from './pages/SearchPage'
 
 import './style/common.css'
+import QuotesPage from './pages/QuotesPage'
 
 class App extends Component {
 
@@ -12,8 +13,8 @@ class App extends Component {
       <Switch>
         <Route exact={true} path="/" render={()=><Redirect to={'/search'}/>}/>
         <Route path="/search" component={SearchPage}/>
+        <Route path="/quotes" component={QuotesPage}/>
         {/*<Route path="/portfolio" component={Portfolio}/>*/}
-        {/*<Route path="/quotes" component={Quotes}/>*/}
       </Switch>
     </Router>
   }

@@ -100,7 +100,7 @@ class Page extends Component {
 }
 
 Page.propTypes = {
-  pageName: PropTypes.string,
+  pageName: PropTypes.any,
   user: PropTypes.string,
   appbar: PropTypes.any,
   menu: PropTypes.any,
