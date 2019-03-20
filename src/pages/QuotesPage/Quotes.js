@@ -1,32 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Page from '../components/Page'
-import Menu from '../Menu'
-import HorizontalScroll from 'react-scroll-horizontal'
+import Page from '../../components/Page'
+import Menu from '../../Menu'
 
 import 'react-card-scroll/lib/assets/styles.css'
-import '../style/quotes.css'
-import classnames from 'classnames'
-import { ChartCanvas } from 'react-stockcharts'
-import BarChart from '../components/BarChart'
-import * as encodeurl from 'encodeurl'
+import PageContext from '../../container/PageContext'
+import WorldIndices from '../../components/WorldIndices'
+import SectorPerformance from '../../components/SectorPerformance'
 
 class Quotes extends Component {
 
-  updateHandle = null
-
-  componentDidMount() {
-    this.props.actions.fetchWorldIndices()
-    this.props.actions.fetchRealtimeSector()
-  }
-
-  componentWillUnmount() {
-    this.updateHandle && clearInterval(this.updateHandle)
-    this.updateHandle = null
-  }
-
   render() {
-    return (
+/*    return (
       <Page
         pageName={'Quotes'}
         user={'Ruixin'}
@@ -127,13 +112,20 @@ class Quotes extends Component {
           </div>
         </div>
       </Page>
-    )
+    )*/
+    return (
+      <PageContext>
+        <Page
+          pageName={<span className="title-name">Market Quotes</span>}
+          user={'Ruixin'}
+          menu={<Menu/>}
+        >
+          <WorldIndices/>
+          <SectorPerformance/>
+        </Page>
+      </PageContext>    )
   }
 }
 
-Quotes.propTypes = {
-  theme: PropTypes.oneOf(['light', 'dark']),
-  actions: PropTypes.object
-}
 
 export default Quotes
