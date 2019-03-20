@@ -1,0 +1,78 @@
+symbol,name,type,region,marketOpen,marketClose,timezone,currency,matchScore
+A,Agilent Technologies Inc.,Equity,United States,09:30,16:00,UTC-04,USD,1.0000
+ACB,Aurora Cannabis Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+AMZN,Amazon.com Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+AAPL,Apple Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+AMD,Advanced Micro Devices Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+T,AT&T Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+BABA,Alibaba Group Holding Limited,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+ALT,Altimmune Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+ACRX,AcelRx Pharmaceuticals Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+AMRN,Amarin Corporation plc,Equity,United States,09:30,16:00,UTC-04,USD,0.2000
+B,Barnes Group Inc.,Equity,United States,09:30,16:00,UTC-04,USD,1.0000
+BPTH,Bio-Path Holdings Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.6667
+BABA,Alibaba Group Holding Limited,Equity,United States,09:30,16:00,UTC-04,USD,0.6667
+BA,The Boeing Company,Equity,United States,09:30,16:00,UTC-04,USD,0.6667
+BAC,Bank of America Corporation,Equity,United States,09:30,16:00,UTC-04,USD,0.6667
+BJ,BJ's Wholesale Club Holdings Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+BE,Bloom Energy Corporation,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+BRY,Berry Petroleum Corporation,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+BV,BrightView Holdings Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+BSVN,Bank7 Corp.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+C,Citigroup Inc.,Equity,United States,09:30,16:00,UTC-04,USD,1.0000
+CVS,CVS Health Corporation,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+COST,Costco Wholesale Corporation,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+CGC,Canopy Growth Corporation,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+CTL,CenturyLink Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+CHK,Chesapeake Energy Corporation,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+CRON,Cronos Group Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+CTK,CooTek (Cayman) Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+CWK,Cushman & Wakefield plc,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+CNST,Constellation Pharmaceuticals Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+D,Dominion Energy Inc.,Equity,United States,09:30,16:00,UTC-04,USD,1.0000
+DOMO,Domo Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+DAVA,Endava plc,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+DMAC,DiaMedica Therapeutics Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+DDMXU,DD3 Acquisition Corp. Units,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+DDOC,"DERMAdoctor, LLC.",Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+DIS,The Walt Disney Company,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+DWDP,DowDuPont Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+DNR,Denbury Resources Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.3333
+E,Eni S.p.A.,Equity,United States,09:30,16:00,UTC-04,USD,1.0000
+EB,Eventbrite Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.6667
+XOM,Exxon Mobil Corporation,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+ELAN,Elanco Animal Health Incorporated,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+ESTC,Elastic N.V.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+EVER,EverQuote Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+DAVA,Endava plc,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+ESTA,Establishment Labs Holdings Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+ETTX,Entasis Therapeutics Holdings Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.1818
+ETON,Eton Pharmaceuticals Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.0833
+F,Ford Motor Company,Equity,United States,09:30,16:00,UTC-04,USD,1.0000
+FB,Facebook Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.6667
+FTCH,Farfetch Limited,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+FHL,FUTU HOLDINGS LTD,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+FOCS,Focus Financial Partners Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+MYFW,First Western Financial Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+FTSV,Forty Seven Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+FTACU,FinTech Acquisition Corp. III,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+FIZZ,National Beverage Corp.,Equity,United States,09:30,16:00,UTC-04,USD,0.3333
+G,Genpact Limited,Equity,United States,09:30,16:00,UTC-04,USD,1.0000
+GE,General Electric Company,Equity,United States,09:30,16:00,UTC-04,USD,0.6667
+GERN,Geron Corporation,Equity,United States,09:30,16:00,UTC-04,USD,0.6667
+GTXI,GTx Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+GH,Guardant Health Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+GOSS,Gossamer Bio Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+GRTS,Gritstone Oncology Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+GMDA,Gamida Cell Ltd.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+GLACU,Greenland Acquisition Corporation,Equity,United States,09:30,16:00,UTC-04,USD,0.3333
+H,Hyatt Hotels Corporation,Equity,United States,09:30,16:00,UTC-04,USD,1.0000
+HYRE,HyreCar Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.6667
+HARP,Harpoon Therapeutics Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.5000
+HOTH,Hoth Therapeutics Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+HCACU,HENNESSY CAPITAL ACQUISITION CORP IV,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+HHHHU,Wealthbridge Acquisition Limited,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+HD,The Home Depot Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+HMNY,Helios and Matheson Analytics Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.4000
+HUYA,HUYA Inc.,Equity,United States,09:30,16:00,UTC-04,USD,0.3333
+HAL,Halliburton Company,Equity,United States,09:30,16:00,UTC-04,USD,0.3333

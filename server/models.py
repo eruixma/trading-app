@@ -44,25 +44,19 @@ class User(db.Model, UserMixin):
         return '<User %r>' % self.username
 
 
-class Trade(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
-    final_price = db.Column(db.Float())
-    amount = db.Column(db.Integer)
-
-
-class StockMeta(db.Model):
+class Portfolio(db.Model):
     symbol = db.Column(db.String(), primary_key=True)
     company = db.Column(db.String())
     industry = db.Column(db.String())
-    country = db.Column(db.String())
-    description = db.Column(db.String())
+    amount = db.Column(db.Integer())
+    costPrice = db.Column(db.Float())
 
 
-class Portfolio(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
-
-
-class SearchHistory(db.Model):
-    query = db.Column(db.String(), primary_key=True)
-    last = db.Column(db.DateTime())
-    results = db.Column(db.String())
+class MockTimeSeries(db.Model):
+    symbol = db.Column(db.String(), primary_key=True)
+    time = db.Column(db.String())
+    open = db.Column(db.Float())
+    high = db.Column(db.Float())
+    low = db.Column(db.Float())
+    close = db.Column(db.Float())
+    volume = db.Column(db.Float())

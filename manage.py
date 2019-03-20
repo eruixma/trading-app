@@ -5,7 +5,7 @@ import os
 from flask_script import Manager, Server
 from flask_script.commands import ShowUrls, Clean
 from server import create_app
-from server.models import db, User
+from server.models import db, User, Portfolio
 
 # default to dev config because no one should use this in
 # production anyway
@@ -24,7 +24,7 @@ def make_shell_context():
         in the context of the app
     """
 
-    return dict(app=app, db=db, User=User)
+    return dict(app=app, db=db, User=User, Portfolio=Portfolio)
 
 
 @manager.command
