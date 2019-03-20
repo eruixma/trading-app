@@ -51,12 +51,29 @@ class Portfolio(db.Model):
     amount = db.Column(db.Integer())
     costPrice = db.Column(db.Float())
 
+    def __init__(self, symbol, company, industry, amount, costPrice):
+        self.symbol = symbol
+        self.company = company
+        self.industry = industry
+        self.amount = amount
+        self.costPrice = costPrice
+
 
 class MockTimeSeries(db.Model):
-    symbol = db.Column(db.String(), primary_key=True)
+    id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
+    symbol = db.Column(db.String())
     time = db.Column(db.String())
     open = db.Column(db.Float())
     high = db.Column(db.Float())
     low = db.Column(db.Float())
     close = db.Column(db.Float())
     volume = db.Column(db.Float())
+
+    def __init__(self, symbol, time, open, high, low, close, volume):
+        self.symbol = symbol
+        self.time = time
+        self.open = open
+        self.high = high
+        self.low = low
+        self.close = close
+        self.volume = volume

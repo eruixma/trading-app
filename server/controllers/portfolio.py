@@ -4,7 +4,7 @@ from werkzeug.exceptions import BadRequest
 
 from ..elasticsearch import es
 from ..extensions import api
-from ..models import db
+from ..models import db, Portfolio
 
 portfolio = Blueprint('portfolio', __name__)
 
@@ -15,6 +15,16 @@ kpi_schema = api.model('KPISchema', {
     'value': fields.String(description='kpi value'),
     'type': fields.String(description='type of the value, e.g. float, int, ...'),
     'unit': fields.String(description='unit of the value')
+})
+
+portfolio_schema = api.model('PortfolioSchema', {
+    'symbol': fields.String(),
+    'company': fields.String(),
+    'industry': fields.String(),
+    'amount': fields.Integer(),
+    'costPrice': fields.Float(),
+    'totalMarketValue': fields.Float(),
+    'flatingProfitLoss': fields.Float(),
 })
 
 
@@ -32,17 +42,21 @@ class PortfolioKPI(Resource):
 
     def get_total_assets(self):
         return {
-            'name':'Total assets',
+            'name': 'Total assets',
             'value': '100',
             'type': 'float',
             'unit': 'USD'
         }
 
+
 @ns.route('/')
-class Portfolio(Resource):
+class PortfolioResouse(Resource):
     @ns.doc("get stock list")
+    @ns.marshal_list_with(portfolio_schema)
     def get(self):
-        pass
+        result = []
+        portfolio = Portfolio.query.all()
+
 
     @ns.doc("buy or sell")
     def post(self):
