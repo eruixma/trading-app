@@ -37,7 +37,7 @@ class StockOverview extends Component {
         <div className={'row'} style={{height: '280px'}}>
           <div className="tile sm-3">
             <div className="content">
-              {price ? (
+              {price&&summary ? (
                   <div className="kpi">
                     <div className="item text-xl">
                       <span>{price.price}</span>

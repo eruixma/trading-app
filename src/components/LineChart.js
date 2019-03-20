@@ -7,14 +7,14 @@ import XAxis from 'react-stockcharts/lib/axes/XAxis'
 import YAxis from 'react-stockcharts/lib/axes/YAxis'
 import { CrossHairCursor, MouseCoordinateX, MouseCoordinateY } from 'react-stockcharts/lib/coordinates'
 import { LineSeries } from 'react-stockcharts/lib/series'
-import { OHLCTooltip } from 'react-stockcharts/lib/tooltip'
 import { fitWidth } from 'react-stockcharts/lib/helper'
-import { format } from "d3-format";
+import { format } from "d3-format"
 import _ from 'lodash'
+
+
 class LineChart extends Component {
   render() {
     const timeSeries = this.props.data
-    console.log(timeSeries.map(ts=>({...ts, time: timeParse("%Y-%m-%d %H:%M:%S")})))
     const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(d => d.time);
     const {
       data,
