@@ -41,6 +41,7 @@ class StockOverview extends Component {
           <div className="tile sm-3">
             <div className="content">
               {price&&summary ? (
+                <div style={{margin:'0 auto'}}>
                   <div className="kpi">
                     <div className="item text-xl">
                       <span>{price.price}</span>
@@ -52,35 +53,40 @@ class StockOverview extends Component {
                       <span>{price.change}</span>
                       <span>&nbsp;</span>
                     </div>
-                    <table className={'table tiny dashed'} style={{marginTop: '10px'}}>
-                      <tbody>
-                      <tr>
-                        <td style={{fontWeight: 500}}>Market Cap</td>
-                        <td>{format(",.4s")(summary['MarketCap']).replace(/G/,"B")}</td>
-                      </tr>
-                      <tr>
-                        <td style={{fontWeight: 500}}>Enterprise Value</td>
-                        <td>{format(",.4s")(summary['EnterpriseValue']).replace(/G/,"B")}</td>
-                      </tr>
-                      <tr>
-                        <td style={{fontWeight: 500}}>P/E (TTM)</td>
-                        <td>{format(",.2f")(summary['PE'])}</td>
-                      </tr>
-                      <tr>
-                        <td style={{fontWeight: 500}}>P/B</td>
-                        <td>{format(",.2f")(summary['PB'])}</td>
-                      </tr>
-                      <tr>
-                        <td style={{fontWeight: 500}}>Headquarters</td>
-                        <td>{summary['location']}</td>
-                      </tr>
-                      <tr>
-                        <td style={{fontWeight: 500}}>Industry</td>
-                        <td>{summary['industry']}</td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>) :
+                  </div>
+                  <table className={'table tiny dashed'} style={{marginTop: '10px'}}>
+                    <thead>
+                    <tr><th/><th/></tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td style={{fontWeight: 500}}>Market Cap</td>
+                      <td>{format(",.4s")(summary['MarketCap']).replace(/G/,"B")}</td>
+                    </tr>
+                    <tr>
+                      <td style={{fontWeight: 500}}>Enterprise Value</td>
+                      <td>{format(",.4s")(summary['EnterpriseValue']).replace(/G/,"B")}</td>
+                    </tr>
+                    <tr>
+                      <td style={{fontWeight: 500}}>P/E (TTM)</td>
+                      <td>{format(",.2f")(summary['PE'])}</td>
+                    </tr>
+                    <tr>
+                      <td style={{fontWeight: 500}}>P/B</td>
+                      <td>{format(",.2f")(summary['PB'])}</td>
+                    </tr>
+                    <tr>
+                      <td style={{fontWeight: 500}}>Headquarters</td>
+                      <td>{summary['location']}</td>
+                    </tr>
+                    <tr>
+                      <td style={{fontWeight: 500}}>Industry</td>
+                      <td>{summary['industry']}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+                </div>) :
                 <div style={{display: 'flex', justifyContent: 'center', height: '100%', flexDirection: 'column'}}>
                   <div className="loading" style={{margin: '0 auto'}}/>
                 </div>

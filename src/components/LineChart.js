@@ -24,7 +24,7 @@ class LineChart extends Component {
     } = xScaleProvider(_.sortBy(timeSeries.map(ts=>({...ts, time: timeParse("%Y-%m-%d %H:%M:%S")(ts.time)})), ['time']));
     const xExtents = [
       xAccessor(last(data)),
-      xAccessor(data[data.length-100])
+      xAccessor(data[0])
     ];
     return (
       <ChartCanvas ratio={this.props.ratio}
