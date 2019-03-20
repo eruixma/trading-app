@@ -50,7 +50,7 @@ def parse_query(q):
             elif k in ["company", "PE", "industry", "symbol", "MarketCap", "EnterpriseValue", "PB", "location"]:
                 dsl['query']['bool'] = {'must': {'term': {k: v}}}
             else:
-                dsl['query']['bool'] = {'must': {'fuzzy': {'message': q}}}
+                dsl['query']['bool'] = {'must': {'match': {'message': q}}}
     else:
         k, v = parse_keyword(q)
         if k == 'order':
@@ -58,7 +58,7 @@ def parse_query(q):
         elif k in ["company", "PE", "industry", "symbol", "MarketCap", "EnterpriseValue", "PB", "location"]:
             dsl['query'] = {'term': {k: v}}
         else:
-            dsl['query'] = {'fuzzy': {'message': q}}
+            dsl['query'] = {'match': {'message': q}}
 
     return dsl
 

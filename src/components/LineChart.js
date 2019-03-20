@@ -27,7 +27,9 @@ class LineChart extends Component {
       xAccessor(data[data.length-100])
     ];
     return (
-      <ChartCanvas ratio={this.props.ratio} width={this.props.width} height={200}
+      <ChartCanvas ratio={this.props.ratio}
+                   width={this.props.width}
+                   height={200}
                    pointsPerPxThreshold={1}
                    margin={{ left: 70, right: 70, top: 0, bottom: 30 }}
                    seriesName={this.props.symbol}
@@ -51,6 +53,9 @@ class LineChart extends Component {
           <LineSeries
             yAccessor={d => d.close}
             strokeWidth={2}
+            hoverStrokeWidth={4}
+            highlightOnHover
+
             stroke="#288964"/>
         </Chart>
 

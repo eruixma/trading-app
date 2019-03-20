@@ -8,6 +8,7 @@ import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale"
 import { last } from "react-stockcharts/lib/utils"
 import LineChart from './LineChart'
 import { format } from 'd3-format'
+import CandleStickChart from './CandleStickChart'
 
 class StockOverview extends Component {
   arrowIconClassName = (price) => classnames("icon", {
@@ -21,17 +22,19 @@ class StockOverview extends Component {
 
   componentDidMount() {
     const {match, actions} = this.props
-    actions.fetchSummary(match.params.symbol)
-    actions.fetchPrice(match.params.symbol)
-    actions.fetchIntradayTimeSeries(match.params.symbol)
+    // actions.fetchSummary(match.params.symbol)
+    // actions.fetchPrice(match.params.symbol)
+    // actions.fetchIntradayTimeSeries(match.params.symbol)
+    actions.fetchDailyTimeSeries(match.params.symbol)
   }
 
   render() {
-    const {store: {quotes: {prices, summaries, intradayTimeSeries}}, match: {params: {symbol}}} = this.props
+    const {store: {quotes: {prices, summaries, intradayTimeSeries, dailyTimeSeries}}, match: {params: {symbol}}} = this.props
 
     const price = prices[symbol]
     const summary = summaries[symbol]
     const timeSeries = intradayTimeSeries[symbol]
+    const dailySeries = dailyTimeSeries[symbol]
     return (
       <Fragment>
         <div className={'row'} style={{height: '280px'}}>
@@ -53,11 +56,11 @@ class StockOverview extends Component {
                       <tbody>
                       <tr>
                         <td style={{fontWeight: 500}}>Market Cap</td>
-                        <td>{format(",.2f")(summary['MarketCap'])}</td>
+                        <td>{format(",.4s")(summary['MarketCap']).replace(/G/,"B")}</td>
                       </tr>
                       <tr>
                         <td style={{fontWeight: 500}}>Enterprise Value</td>
-                        <td>{format(",.2f")(summary['EnterpriseValue'])}</td>
+                        <td>{format(",.4s")(summary['EnterpriseValue']).replace(/G/,"B")}</td>
                       </tr>
                       <tr>
                         <td style={{fontWeight: 500}}>P/E (TTM)</td>
@@ -98,7 +101,7 @@ class StockOverview extends Component {
             </div>
           </div>
         </div>
-        <div className="row" style={{height: '280px'}}>
+        <div className="row" style={{height: 500}}>
           <div className="tile sm-12">
             <div className="header">
               <div className="left">
@@ -106,7 +109,10 @@ class StockOverview extends Component {
               </div>
             </div>
             <div className="content">
-
+              {dailySeries ? <CandleStickChart data={dailySeries} symbol={symbol}/> :
+                <div style={{display: 'flex', justifyContent: 'center', height: '100%', flexDirection: 'column'}}>
+                  <div className="loading" style={{margin: '0 auto'}}/>
+                </div>}
             </div>
           </div>
         </div>
