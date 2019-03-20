@@ -1,11 +1,11 @@
 #! ../env/bin/python
 
-from flask import Flask
+from flask import Flask, request, redirect, url_for
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from . import assets
 from .models import db
-from .controllers.main import main
+from .controllers.main import main, home
 from .controllers.portfolio import portfolio
 from .controllers.search import search
 from .controllers.quotes import quotes
@@ -42,7 +42,6 @@ def create_app(object_name):
     # initialize SQLAlchemy
     db.init_app(app)
 
-
     login_manager.init_app(app)
 
     # Import and register the different asset bundles
@@ -58,5 +57,11 @@ def create_app(object_name):
     app.register_blueprint(quotes, url_prefix="/api/v1")
 
     api.init_app(app)
+
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return app.send_static_file('index.html')
+
 
     return app

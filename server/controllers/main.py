@@ -7,4 +7,3 @@ main = Blueprint('main', __name__)
 def home():
     return current_app.send_static_file('index.html')
 
-
