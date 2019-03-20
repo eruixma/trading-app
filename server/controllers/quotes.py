@@ -919,7 +919,7 @@ class TimeSeries(Resource):
                 apikey
             )
         elif function_name == 'TIME_SERIES_DAILY':
-            return '{}?function={}&symbol={}&outputsize=compact&apikey={}'.format(
+            return '{}?function={}&symbol={}&outputsize=full&apikey={}'.format(
                 alpha_vantage_url,
                 function_name,
                 symbol,
@@ -938,20 +938,21 @@ class TimeSeries(Resource):
 
     @ns.marshal_with(time_series_schema)
     def get(self, symbol):
-        # args = parser.parse_args()
-        # req = requests.get(self.get_api(symbol, args['function'], args['interval']))
-        #
-        # ts = req.json()[self.get_result_key(args['function'], args['interval'])]
-        #
-        # result = []
-        # for k, v in ts.items():
-        #     result.append({
-        #         'time': k,
-        #         'open': float(v['1. open']),
-        #         'high': float(v['2. high']),
-        #         'low': float(v['3. low']),
-        #         'close': float(v['4. close']),
-        #         'volume': float(v['5. volume']),
-        #     })
+        args = parser.parse_args()
+        req = requests.get(self.get_api(symbol, args['function'], args['interval']))
 
-        return test_data
+        ts = req.json()[self.get_result_key(args['function'], args['interval'])]
+
+        result = []
+        for k, v in ts.items():
+            result.append({
+                'time': k,
+                'open': float(v['1. open']),
+                'high': float(v['2. high']),
+                'low': float(v['3. low']),
+                'close': float(v['4. close']),
+                'volume': float(v['5. volume']),
+            })
+
+        # if args['function']=='TIME_SERIES_DAILY': return test_data
+        return result

@@ -59,6 +59,7 @@ class CandleStickChart extends Component {
 
     return (
       <ChartCanvas
+        type={'svg'}
         height={420}
         ratio={ratio}
         width={width}
@@ -71,7 +72,7 @@ class CandleStickChart extends Component {
         displayXAccessor={displayXAccessor}
         xExtents={xExtents}
       >
-        <Chart id={1} yExtents={[d => [d.high, d.low]]} textFill={'#f2f2f2'}>
+        <Chart id={100} yExtents={[d => [d.high, d.low]]} textFill={'#f2f2f2'}>
           <XAxis axisAt="bottom" orient="bottom" tickStroke={'#f2f2f2'} stroke={'#f2f2f2'} ticks={20}/>
           <YAxis axisAt="left" orient="left" ticks={10} stroke={'none'} tickStroke={'#f2f2f2'}/>
           <MouseCoordinateY
@@ -108,7 +109,7 @@ class CandleStickChart extends Component {
             ]}
           />
         </Chart>
-        <Chart id={2} height={150} yExtents={d => d.volume} origin={(w, h) => [0, h - 150]}>
+        <Chart id={200} height={150} yExtents={d => d.volume} origin={(w, h) => [0, h - 150]}>
           <YAxis axisAt="right" orient="right" ticks={5} tickFormat={format(".2s")} stroke={'none'} tickStroke={'#f2f2f2'}/>
 
           <MouseCoordinateX

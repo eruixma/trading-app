@@ -22,10 +22,10 @@ class StockOverview extends Component {
 
   componentDidMount() {
     const {match, actions} = this.props
-    // actions.fetchSummary(match.params.symbol)
-    // actions.fetchPrice(match.params.symbol)
-    // actions.fetchIntradayTimeSeries(match.params.symbol)
     actions.fetchDailyTimeSeries(match.params.symbol)
+    actions.fetchSummary(match.params.symbol)
+    actions.fetchPrice(match.params.symbol)
+    actions.fetchIntradayTimeSeries(match.params.symbol)
   }
 
   render() {
@@ -105,7 +105,7 @@ class StockOverview extends Component {
           <div className="tile sm-12">
             <div className="header">
               <div className="left">
-                <div className="title">Daily</div>
+                <div className="title">Daily (10 years)</div>
               </div>
             </div>
             <div className="content">
