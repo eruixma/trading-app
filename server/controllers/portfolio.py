@@ -4,7 +4,7 @@ from werkzeug.exceptions import BadRequest
 
 from ..elasticsearch import es
 from ..extensions import api
-from ..models import db, Portfolio
+from ..models import db, Portfolio, MockTimeSeries
 
 portfolio = Blueprint('portfolio', __name__)
 
@@ -54,8 +54,21 @@ class PortfolioResouse(Resource):
     @ns.doc("get stock list")
     @ns.marshal_list_with(portfolio_schema)
     def get(self):
-        return Portfolio.query.all()
-
+        result = []
+        for p in Portfolio.query.all():
+            current_price = MockTimeSeries.query.filter_by(symbol=p.symbol.lower()).all()[0].close
+            total_market_value = current_price * p.amount
+            flating_profit_loss = total_market_value - p.costPrice * p.amount
+            result.append({
+                'symbol': p.symbol,
+                'company': p.company,
+                'industry': p.industry,
+                'amount': p.amount,
+                'costPrice': p.costPrice,
+                'totalMarketValue': total_market_value,
+                'flatingProfitLoss': flating_profit_loss,
+            })
+        return result
 
     @ns.doc("buy or sell")
     def post(self):
