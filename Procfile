@@ -1,1 +1,1 @@
-web: APPNAME_ENV=python manage.py createdb; prod python manage.py server
+web: python manage.py createdb && APPNAME_ENV=prod python manage.py server
