@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import connect from 'react-redux/es/connect/connect'
 import {actions as appActions} from '../reducers/app'
 import {actions as quotesActions} from '../reducers/quotes'
+import {actions as portfolioActions} from '../reducers/portfolio'
 import {actions as searchActions} from '../reducers/search'
 import { PageContext } from '../components/Page'
 
@@ -15,6 +16,7 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({
       ...appActions,
       ...quotesActions,
+      ...portfolioActions,
       ...searchActions,
     }, dispatch)
   }

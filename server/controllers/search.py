@@ -44,7 +44,7 @@ def parse_query(q):
     if logic == 'AND':
         dsl['query'] = {'bool': {}}
         for s in query:
-            k, v = parse_keyword(s)
+            k, v = parse_keyword(s.lower())
             if k == 'sort':
                 dsl['sort'] = [{v.split(',')[0]: {'order': v.split(',')[1] if len(v.split(',')) > 0 else 'desc'}}]
             elif k in ["company", "PE", "industry", "symbol", "MarketCap", "EnterpriseValue", "PB", "location"]:
@@ -52,7 +52,7 @@ def parse_query(q):
             else:
                 dsl['query']['bool'] = {'must': {'match': {'message': q}}}
     else:
-        k, v = parse_keyword(q)
+        k, v = parse_keyword(q.lower())
         if k == 'order':
             dsl['sort'] = [{v.split(',')[0]: {'order': v.split(',')[1] if len(v.split(',')) > 0 else 'desc'}}]
         elif k in ["company", "PE", "industry", "symbol", "MarketCap", "EnterpriseValue", "PB", "location"]:
@@ -70,7 +70,7 @@ class Stock(Resource):
     @ns.marshal_list_with(stock_schema)
     def get(self):
         args = parser.parse_args()
-        query = parse_query(args['q'].lower())
+        query = parse_query(args['q'])
         query['size'] = 5
         print(query)
 

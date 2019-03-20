@@ -919,7 +919,7 @@ class TimeSeries(Resource):
                 apikey
             )
         elif function_name == 'TIME_SERIES_DAILY':
-            return '{}?function={}&symbol={}&outputsize=full&apikey={}'.format(
+            return '{}?function={}&symbol={}&outputsize=compact&apikey={}'.format(
                 alpha_vantage_url,
                 function_name,
                 symbol,

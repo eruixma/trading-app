@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import { format } from "d3-format"
@@ -22,7 +22,7 @@ import { ema, stochasticOscillator, bollingerBand } from "react-stockcharts/lib/
 import LineSeries from 'react-stockcharts/lib/series/LineSeries'
 import GroupTooltip from 'react-stockcharts/lib/tooltip/GroupTooltip'
 
-class CandleStickChart extends Component {
+class CandleStickChart extends PureComponent {
   render() {
     const {type, data: initialData, width, ratio} = this.props
 
@@ -52,14 +52,13 @@ class CandleStickChart extends Component {
     console.log(data)
 
     const start = xAccessor(last(data))
-    const end = xAccessor(data[Math.max(0, data.length - 180)])
+    const end = xAccessor(data[Math.max(0, data.length - 90)])
     const xExtents = [start, end]
 
 
 
     return (
       <ChartCanvas
-        type={'svg'}
         height={420}
         ratio={ratio}
         width={width}

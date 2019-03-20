@@ -4,6 +4,7 @@ import * as PropTypes from 'prop-types'
 import { getContext } from 'recompose'
 import { Link, withRouter } from 'react-router-dom'
 import queryString from 'query-string'
+import { format } from 'd3-format'
 
 class SearchResultList extends Component {
 
@@ -54,11 +55,11 @@ class SearchResultList extends Component {
                       <tbody>
                       <tr>
                         <td style={{fontWeight: 500}}>Market Cap</td>
-                        <td>{result['MarketCap']}</td>
+                        <td>{format(",.4s")(result['MarketCap']).replace(/G/,"B")}</td>
                       </tr>
                       <tr>
                         <td style={{fontWeight: 500}}>Enterprise Value</td>
-                        <td>{result['EnterpriseValue']}</td>
+                        <td>{format(",.4s")(result['EnterpriseValue']).replace(/G/,"B")}</td>
                       </tr>
                       <tr>
                         <td style={{fontWeight: 500}}>P/E (TTM)</td>

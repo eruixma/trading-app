@@ -1,16 +1,13 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { getContext } from 'recompose'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import * as classnames from 'classnames'
-import { timeParse } from "d3-time-format"
-import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale"
-import { last } from "react-stockcharts/lib/utils"
 import LineChart from './LineChart'
 import { format } from 'd3-format'
 import CandleStickChart from './CandleStickChart'
 
-class StockOverview extends Component {
+class StockOverview extends PureComponent {
   arrowIconClassName = (price) => classnames("icon", {
     "icon-arrow-down": price.change.charAt(0) === '-',
     "icon-arrow-up": price.change.charAt(0) === '+'
@@ -111,7 +108,7 @@ class StockOverview extends Component {
           <div className="tile sm-12">
             <div className="header">
               <div className="left">
-                <div className="title">Daily (10 years)</div>
+                <div className="title">Daily</div>
               </div>
             </div>
             <div className="content">

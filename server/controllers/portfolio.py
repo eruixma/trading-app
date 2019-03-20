@@ -1,3 +1,5 @@
+import random
+
 from flask import Blueprint
 from flask_restplus import Resource, fields
 from werkzeug.exceptions import BadRequest
@@ -24,7 +26,9 @@ portfolio_schema = api.model('PortfolioSchema', {
     'amount': fields.Integer(),
     'costPrice': fields.Float(),
     'totalMarketValue': fields.Float(),
-    'flatingProfitLoss': fields.Float(),
+    'floatingProfitLoss': fields.Float(),
+    'change': fields.Float(),
+    'currentPrice': fields.Float(),
 })
 
 
@@ -56,9 +60,10 @@ class PortfolioResouse(Resource):
     def get(self):
         result = []
         for p in Portfolio.query.all():
-            current_price = MockTimeSeries.query.filter_by(symbol=p.symbol.lower()).all()[0].close
+            all = MockTimeSeries.query.filter_by(symbol=p.symbol.lower()).all()
+            current_price = all[random.randint(0, len(all)-1)].close
             total_market_value = current_price * p.amount
-            flating_profit_loss = total_market_value - p.costPrice * p.amount
+            floating_profit_loss = total_market_value - p.costPrice * p.amount
             result.append({
                 'symbol': p.symbol,
                 'company': p.company,
@@ -66,10 +71,13 @@ class PortfolioResouse(Resource):
                 'amount': p.amount,
                 'costPrice': p.costPrice,
                 'totalMarketValue': total_market_value,
-                'flatingProfitLoss': flating_profit_loss,
+                'floatingProfitLoss': floating_profit_loss,
+                'change': floating_profit_loss / total_market_value,
+                'currentPrice': current_price,
             })
         return result
 
     @ns.doc("buy or sell")
     def post(self):
         pass
+
