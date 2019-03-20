@@ -14,6 +14,7 @@ import { format } from 'd3-format'
 import { LineSeries } from 'react-stockcharts/lib/series'
 import { fitWidth } from 'react-stockcharts/lib/helper'
 import { last } from 'react-stockcharts/lib/utils'
+import SingleValueTooltip from 'react-stockcharts/lib/tooltip/SingleValueTooltip'
 
 const test_data = [
   {
@@ -1567,7 +1568,7 @@ class CompareChart extends Component {
                      displayXAccessor={displayXAccessor}
                      xScale={xScale}
                      xExtents={xExtents}>
-          <Chart id={1} yExtents={d => [d.percentChange/100]}>
+          <Chart id={12312312} yExtents={d => [d.percentChange/100]}>
             <XAxis axisAt="bottom" orient="bottom" stroke={'#f2f2f2'} tickStroke={'#f2f2f2'}/>
             <YAxis axisAt="left" orient="left" ticks={20} tickFormat={format(".0%")} stroke={'#f2f2f2'} tickStroke={'#f2f2f2'}/>
             <MouseCoordinateX
@@ -1596,6 +1597,24 @@ class CompareChart extends Component {
           </Chart>
 
           <CrossHairCursor stroke={'#f2f2f2'}/>
+          <SingleValueTooltip
+            yAccessor={d => d.percentChange/100}
+            yLabel="Change"
+            yDisplayFormat={format(".2%")}
+            valueStroke="#f2f2f2"
+            valueFill={'#f2f2f2'}
+            /* labelStroke="#4682B4" - optional prop */
+            origin={[40, 20]}
+          />
+          <SingleValueTooltip
+            yAccessor={d => d.spChange/100}
+            yLabel="S&P 500"
+            yDisplayFormat={format(".2%")}
+            valueStroke="#f2f2f2"
+            valueFill={'#f2f2f2'}
+            /* labelStroke="#4682B4" - optional prop */
+            origin={[40,35]}
+          />
         </ChartCanvas>
     )
   }
