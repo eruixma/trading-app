@@ -36,7 +36,7 @@ class CandleStickChart extends PureComponent {
       .accessor(d => d.ema5);
 
     const ema20 = ema()
-      .id(0)
+      .id(1)
       .options({ windowSize: 20 })
       .merge((d, c) => {d.ema20 = c;})
       .stroke('#dcaf00')

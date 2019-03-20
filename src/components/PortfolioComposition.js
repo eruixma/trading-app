@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { getContext } from 'recompose'
 import { withRouter } from 'react-router-dom'
 import { Cell, Pie, PieChart, ResponsiveContainer, Sector, Tooltip } from 'recharts'
+import CompareChart from './CompareChart'
 
 
 class PortfolioComposition extends PureComponent {
@@ -60,11 +61,11 @@ class PortfolioComposition extends PureComponent {
         <div className="tile sm-8">
           <div className="header">
             <div className="left">
-              <div className="title">Compare</div>
+              <div className="title">Compare with S&P 500</div>
             </div>
           </div>
           <div className="content">
-
+            <CompareChart/>
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PageContext from '../../container/PageContext'
 import Page from '../../components/Page'
 import Menu from '../../Menu'
@@ -12,7 +12,9 @@ class Portfolio extends Component {
       <PageContext>
         <Page pageName={<span className="title-name">My portfolio</span>}
               user={'Ruixin'}
-              menu={<Menu/>}>
+              menu={<Menu/>}
+              appbar={<Fragment><button className="btn primary">Buy</button><button className="btn">Sell</button></Fragment>}
+        >
           <PortfolioKPI/>
           <PortfolioComposition/>
           <PortfolioTable/>

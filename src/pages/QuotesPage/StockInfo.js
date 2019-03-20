@@ -14,6 +14,7 @@ class StockInfo extends Component {
           pageName={<StockTitle/>}
           user={'Ruixin'}
           menu={<Menu/>}
+          appbar={<button className="btn primary">Buy</button>}
         >
           <StockOverview/>
         </Page>

@@ -1,5 +1,4 @@
-# trading-app
-A PoC of stock trading
+# Features
 
 ## Searching
 
@@ -29,4 +28,6 @@ A PoC of stock trading
 ### Acount status
 
 ### Buy & sell
+
+# Application Architecture
 
