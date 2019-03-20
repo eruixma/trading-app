@@ -60,7 +60,7 @@ class PortfolioComposition extends PureComponent {
         <div className="tile sm-8">
           <div className="header">
             <div className="left">
-              <div className="title">Industry</div>
+              <div className="title">Compare</div>
             </div>
           </div>
           <div className="content">
