@@ -54,7 +54,7 @@ class PortfolioResouse(Resource):
     @ns.doc("get stock list")
     @ns.marshal_list_with(portfolio_schema)
     def get(self):
-        Portfolio.query.all()
+        return Portfolio.query.all()
 
 
     @ns.doc("buy or sell")
