@@ -1,1 +1,1 @@
-web: python manage.py server
+web: APPNAME_ENV=prod python manage.py server
