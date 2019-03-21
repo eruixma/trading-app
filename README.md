@@ -55,13 +55,11 @@ The entire search solution is backed by Elasticsearch.
     -React & Redux
     
 * Backend
-    - Flask
+    - Flask, Python
 
-* Search
-    - Elasticsearch
-    
 * Database
     - Sqllite
+    - Elasticsearch
     
 
 * Flow chart
@@ -87,4 +85,14 @@ The entire search solution is backed by Elasticsearch.
                                         +-----------------------+
 
 
+
+
+##Project Layout
+
+    ├───initdata    stork data to provision database
+    ├───publc       static resources
+    ├───scripts     scripts to crawl data
+    ├───server      backend root 
+    ├───src         frontend root
+    ├───tests       unittest
 
