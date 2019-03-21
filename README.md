@@ -44,6 +44,10 @@ The entire search solution is backed by Elasticsearch.
     - account composition
     -compare with S&P 500
 
+## Additional functional
+
+* Theme support
+
 
 # Application Architecture
 
