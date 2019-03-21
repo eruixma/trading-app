@@ -89,7 +89,7 @@ The entire search solution is backed by Elasticsearch.
 
 ##Project Layout
 
-    ├───initdata    stork data to provision database
+    ├───initdata    stock data to provision database
     ├───publc       static resources
     ├───scripts     scripts to crawl data
     ├───server      backend root 
