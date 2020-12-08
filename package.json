@@ -54,7 +54,7 @@
   "devDependencies": {
     "crawler": "^1.2.0",
     "elasticsearch": "^15.4.1",
-    "fast-csv": "^2.4.1",
+    "fast-csv": "^4.3.6",
     "js-string-escape": "^1.0.1"
   },
   "proxy": "http://localhost:5000"
