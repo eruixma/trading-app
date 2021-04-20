@@ -28,7 +28,7 @@ jsonschema==3.0.1
 MarkupSafe==1.1.1
 mccabe==0.3
 pep8==1.5.7
-py==1.8.0
+py==1.10.0
 pyflakes==0.8.1
 pyrsistent==0.14.11
 pytest==3.0.5
